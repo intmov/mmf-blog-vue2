@@ -11,11 +11,20 @@
 </div>
 </template>
 <script lang="babel">
+
+// import Vue from 'vue'
+// import Element from 'element-ui'
+// import 'element-ui/lib/theme-default/index.css'
+// import $ from 'jquery'
+
+
 import { mapGetters } from 'vuex'
 import NProgress from 'nprogress'
 import Navigation from './components/navigation.vue'
 import signUp from './components/signup.vue'
 import signIn from './components/signin.vue'
+
+// Vue.use(Element)
 
 export default {
     computed: {
