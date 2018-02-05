@@ -39,6 +39,7 @@ function checkCode(res) {
 
 export default {
     post(url, data) {
+        console.log(qs.stringify(data))
         return axios({
             method: 'post',
             url: config.api + url,

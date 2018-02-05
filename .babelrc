@@ -11,6 +11,11 @@
                 }]
             ],
             "plugins": [
+                ["component", {
+                    "libraryName": "element-ui",
+                    "styleLibraryName": "theme-chalk"
+                  }
+                ],
                 "transform-runtime",
                 "transform-object-rest-spread"
             ]
@@ -26,6 +31,11 @@
                 }]
             ],
             "plugins": [
+                ["component", {
+                    "libraryName": "element-ui",
+                    "styleLibraryName": "theme-chalk"
+                  }
+                ],
                 "transform-object-rest-spread"
             ]
         }

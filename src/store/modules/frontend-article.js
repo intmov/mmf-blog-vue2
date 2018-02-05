@@ -18,11 +18,13 @@ const state = {
 const actions = {
     async ['getArticleList']({commit, state, rootState: {global, route: { fullPath }}}, config) {
         const path = fullPath
-        if (state.lists.data.length > 0 && path === state.lists.path && config.page === 1) {
-            global.progress = 100
-            return
-        }
+        // if (state.lists.data.length > 0 && path === state.lists.path && config.page === 1) {
+        //     global.progress = 100
+        //     return
+        // }
+        console.log(config)
         const { data: { data, code} } = await api.get('frontend/article/list', {...config, cache: true})
+        console.log(data)
         if (data && code === 200) {
             commit('receiveArticleList', {
                 ...config,

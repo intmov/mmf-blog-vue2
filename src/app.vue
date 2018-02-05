@@ -1,5 +1,5 @@
 <template>
-<div id="app" class="g-doc">
+<div id="app">
     <Navigation :backend="backend"></Navigation>
     <transition name="fade" mode="out-in">
         <router-view :key="key" class="router"></router-view>
@@ -12,10 +12,12 @@
 </template>
 <script lang="babel">
 
-// import Vue from 'vue'
-// import Element from 'element-ui'
+import Vue from 'vue'
+import Element from 'element-ui'
 // import 'element-ui/lib/theme-default/index.css'
 // import $ from 'jquery'
+
+import Calendar from 'vue-calendar-component'
 
 
 import { mapGetters } from 'vuex'
@@ -24,7 +26,8 @@ import Navigation from './components/navigation.vue'
 import signUp from './components/signup.vue'
 import signIn from './components/signin.vue'
 
-// Vue.use(Element)
+Vue.use(Element)
+Vue.use(Calendar)
 
 export default {
     computed: {
