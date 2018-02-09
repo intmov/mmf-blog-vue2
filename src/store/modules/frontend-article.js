@@ -12,7 +12,9 @@ const state = {
         path: '',
         isLoad: false
     },
-    trending: []
+    trending: [],
+    monthList: [],
+    selfList:[],
 }
 
 const actions = {
@@ -22,7 +24,7 @@ const actions = {
         //     global.progress = 100
         //     return
         // }
-        console.log(config)
+        // console.log(config)
         const { data: { data, code} } = await api.get('frontend/article/list', {...config, cache: true})
         console.log(data)
         if (data && code === 200) {
@@ -52,7 +54,34 @@ const actions = {
         if (data && code === 200) {
             commit('receiveTrending', data)
         }
+    },
+    async ['getMonthList']({ commit, state, rootState: { global, route: { fullPath } } }, config ) {
+        const path = fullPath
+        console.log('monthlist',config)
+        const { data: { data, code } } = await api.get('frontend/article/list', { ...config, cache: false })
+        console.log(data)
+        if (data && code === 200) {
+            commit('receiveMonthList', {
+                ...config,
+                ...data,
+                path
+            })
+        }
+    },
+    async ['getSelfList']({ commit, state, rootState: { global, route: { fullPath } } }, config) {
+        const path = fullPath
+        console.log('Selflist', config)
+        const { data: { data, code } } = await api.get('frontend/article/list', { ...config, cache: false })
+        console.log(data)
+        if (data && code === 200) {
+            commit('receiveSelfList', {
+                ...config,
+                ...data,
+                path
+            })
+        }
     }
+
 }
 
 const mutations = {
@@ -73,6 +102,24 @@ const mutations = {
     },
     ['receiveTrending'](state, data) {
         state.trending = data.list
+    },
+    ['receiveMonthList'](state, { list, hasNext, hasPrev, page, path }) {
+        const retlist = []
+        for (let i = 0; i < list.length; i++) {
+            const element = list[i]
+            if (element && element.creat_date && element.creat_date.split('-')){
+                const ret = element.creat_date.split('-')[2]
+                if(ret){
+                    retlist.push(parseInt(ret, 10))
+                }
+            }
+        }
+        // console.log(retlist)
+        state.monthList = retlist
+    },
+    ['receiveSelfList'](state, { list, hasNext, hasPrev, page, path }) {
+        const retlist = []
+        state.selfList = list
     },
     ['modifyLikeStatus'](state, {id, status}) {
         if (state.item.data._id === id) {
@@ -98,6 +145,12 @@ const getters = {
     },
     ['getTrending'](state) {
         return state.trending
+    },
+    ['getMonthList'](state) {
+        return state.monthList
+    },
+    ['getSelfList'](state) {
+        return state.selfList
     }
 }
 

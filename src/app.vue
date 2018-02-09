@@ -17,7 +17,6 @@ import Element from 'element-ui'
 // import 'element-ui/lib/theme-default/index.css'
 // import $ from 'jquery'
 
-import Calendar from 'vue-calendar-component'
 
 
 import { mapGetters } from 'vuex'
@@ -25,9 +24,10 @@ import NProgress from 'nprogress'
 import Navigation from './components/navigation.vue'
 import signUp from './components/signup.vue'
 import signIn from './components/signin.vue'
+// import Calendar from './components/calendar.vue'
 
 Vue.use(Element)
-Vue.use(Calendar)
+// Vue.use(Calendar)
 
 export default {
     computed: {

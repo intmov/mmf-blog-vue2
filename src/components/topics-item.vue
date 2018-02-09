@@ -1,18 +1,24 @@
 <template>
     <div class="card feed">
-        <div class="feed-article-content"> <span class="feed-time">{{ item.update_date }}</span><span class="feed-source">来自用户 <router-link :to="'/user/account'" v-text="item.user" class="feed-minor-link"></router-link></span>
+        <div class="feed-article-content"> <span class="feed-time">{{ item.update_date.slice(0,-3) }}</span><span class="feed-source">来自用户 <span v-text="item.user" class="feed-minor-link"></span></span>
             <!-- <div class="feed-main-link-wrap"><router-link :to="'/article/' + item._id" v-text="item.title" class="feed-main-link"></router-link></div> -->
             <ul>
                 <li v-for="item in JSON.parse(item.items)" :item="item" :key="item._id">
-                    {{item.catalog}} - {{item.start}}-{{item.end}}, 共{{item.chapters}}章
+                    <div v-if="item.bookStart == item.bookEnd">
+                       {{item.catalog}}{{item.bookStart}}{{getVerse(item.verseStart)}}-{{getVerse(item.verseEnd)}},
+                      共{{getChapters(item)}}章
+                    </div>
+                    <div v-else>
+                       {{item.catalog}}{{item.bookStart}}{{getVerse(item.verseStart)}}-{{item.bookEnd}}{{getVerse(item.verseEnd)}},
+                      共{{getChapters(item)}}章
+                    </div>
                 </li>
             </ul>
-            <div>{{item.items2}}</div>
             <div class="feed-desc-wrap">
                 <div v-text="item.content"></div>
             </div>
         </div>
-        <actions :item="item"></actions>
+        <actions v-if="actionVisible" :item="item"></actions>
     </div>
 </template>
 <script lang="babel">
@@ -22,10 +28,21 @@ export default {
     serverCacheKey: props => {
         return `frontend::topics::item::${props.item._id}`
     },
-    props: ['item'],
+    props: ['item','actionVisible'],
     data () {
         return {
             showMore: false
+        }
+    },
+    methods:{
+        getChapters(item){
+            if(item.bookStart === item.bookEnd){
+                return item.verseEnd[0]-item.verseStart[0]+1
+            }
+            return '很多'
+        },
+        getVerse(verse){
+            return verse[0]+''+(verse[1]?":"+verse[1]:'')
         }
     },
     components: {
@@ -36,8 +53,9 @@ export default {
 <style>
 ul li{
     list-style: circle;
-    list-style-type: square;
-    text-align: center;
+    list-style-type: circle;
+    margin-left: 40px;
+    /* text-align: center; */
 /* background:#CCC; */
 }
 ul{
