@@ -14,16 +14,6 @@ module.exports = {
         // Before setting to `true`, make sure to:
         // npm install --save-dev compression-webpack-plugin
         productionGzip: false,
-        proxyTable: {
-            '/api': {
-                target: 'http://localhost:4000',
-                changeOrigin: true,
-                pathRewrite: {
-                    '^/api': '/api'
-                }
-            }
-        },
-
         productionGzipExtensions: ['js', 'css']
     },
     dev: {

@@ -3,8 +3,8 @@
     <div class="settings-main card">
          <el-form ref="form" :model="form"  @submit.prevent="onSubmit" >
             <div class='article-title'>为{{form.date}}打卡：</div>
-             <el-form-item label="投入时间" label-width="120px" class="setSign">
-                 <el-col :span="11">
+             <el-form-item label="投入时间" label-width="80px" class="setSign">
+                 <el-col :span="18">
                     <el-time-picker type="fixed-time"  value-format="HH:mm"  format="HH小时-mm分钟"  placeholder="选择时间" v-model="form.readtime" style="width: 100%;"></el-time-picker>
                 </el-col>
              </el-form-item>
