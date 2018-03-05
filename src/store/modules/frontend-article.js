@@ -25,6 +25,7 @@ const actions = {
         //     return
         // }
         // console.log(config)
+        if(!config) return
         const { data: { data, code} } = await api.get('frontend/article/list', {...config, cache: true})
         console.log(data)
         if (data && code === 200) {

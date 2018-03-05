@@ -157,24 +157,6 @@ export default {
         if (scrollTop) ls.set(path, scrollTop)
         else ls.remove(path)
         next()
-    },
-    metaInfo() {
-        var title = 'M.M.F 小屋'
-        const {id, key, by} = this.$route.params
-        if (id) {
-            const obj = this.category.find(item => item._id === id)
-            if (obj) {
-                title = obj.cate_name + ' - ' + title
-            }
-        } else if (key) {
-            title = '搜索: ' + key + ' - ' + title
-        } else if (by) {
-            title = '热门 - ' + title
-        }
-        return {
-            title,
-            meta: [{ vmid: 'description', name: 'description', content: title }]
-        }
     }
 }
 </script>

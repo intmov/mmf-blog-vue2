@@ -4,11 +4,11 @@
             <!-- <div class="feed-main-link-wrap"><router-link :to="'/article/' + item._id" v-text="item.title" class="feed-main-link"></router-link></div> -->
             <ul>
                 <li v-for="item in JSON.parse(item.items)" :item="item" :key="item._id">
-                    <div v-if="item.bookStart == item.bookEnd">
+                    <div v-if="item && item.bookStart == item.bookEnd">
                        {{item.catalog}}{{item.bookStart}}{{getVerse(item.verseStart)}}-{{getVerse(item.verseEnd)}},
                       共{{getChapters(item)}}章
                     </div>
-                    <div v-else>
+                    <div v-else-if="item">
                        {{item.catalog}}{{item.bookStart}}{{getVerse(item.verseStart)}}-{{item.bookEnd}}{{getVerse(item.verseEnd)}},
                       共{{getChapters(item)}}章
                     </div>
@@ -36,13 +36,16 @@ export default {
     },
     methods:{
         getChapters(item){
-            if(item.bookStart === item.bookEnd){
+            if(item.bookStart === item.bookEnd && item.verseEnd && item.verseStart){
                 return item.verseEnd[0]-item.verseStart[0]+1
             }
             return '很多'
         },
         getVerse(verse){
-            return verse[0]+''+(verse[1]?":"+verse[1]:'')
+            if(verse && verse.length > 0){
+                return verse[0]+''+(verse[1]?":"+verse[1]:'')
+            }
+            return ''
         }
     },
     components: {
