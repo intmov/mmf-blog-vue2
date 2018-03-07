@@ -30,7 +30,7 @@
         </div>
     </div>
 </template>
-<script lang="babel">
+<script lang="babel" type="text/babel">
 import ls from 'store2'
 import api from '~api'
 import { mapGetters } from 'vuex'

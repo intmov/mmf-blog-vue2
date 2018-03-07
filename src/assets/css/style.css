@@ -1,5 +1,5 @@
 html {
-    overflow-y: scroll; 
+    overflow-y: scroll;
     background: #ebf0f0;
 }
 /* 清除内外边距 */
@@ -7,7 +7,7 @@ html {
 body, h1, h2, h3, h4, h5, h6, hr, p, blockquote,
 /* structural elements 结构元素 */
 
-dl, dt, dd, 
+dl, dt, dd,
 /* list elements 列表元素 */
 
 pre,
@@ -632,7 +632,7 @@ a {
     color: #3e4545;
     line-height: 25px;
     display: block;
-    max-height: 125px;
+    /*max-height: 125px;*/
     overflow: hidden;
 }
 

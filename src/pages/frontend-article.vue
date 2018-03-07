@@ -34,7 +34,7 @@
     </div>
 </template>
 
-<script lang="babel">
+<script lang="babel" type="text/babel">
 import { mapGetters } from 'vuex'
 import metaMixin from '~mixins'
 import actions from '../components/item-actions.vue'

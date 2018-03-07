@@ -17,7 +17,7 @@
     </div>
 </template>
 
-<script lang="babel">
+<script lang="babel" type="text/babel">
 import { mapGetters } from 'vuex'
 const fetchInitialData = async (store, config = { limit: 99}) => {
     await store.dispatch('global/category/getCategoryList', config)
