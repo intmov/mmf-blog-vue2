@@ -86,12 +86,12 @@
     </div>
 </template>
 
-<script lang="babel">
+<script lang="babel" type="text/babel">
 // /* global postEditor */
 import api from '~api'
 import { mapGetters } from 'vuex'
 import aInput from '../components/_input.vue'
-import { bookOptions, selectDate, testments } from '../utils'
+import {bookOptions, getChapterIndex, testments} from '../utils'
 import topicsItem from '../components/topics-item.vue'
 
 const fetchInitialData = async (store, config = { limit: 99}) => {
@@ -123,6 +123,8 @@ export default {
                 items2:"",
                 user: '',
                 date: localStorage.selectDate,
+                chapters: 0,
+                meditation: 0
             }
         }
     },
@@ -132,10 +134,31 @@ export default {
     computed: {
         ...mapGetters({
             category: 'global/category/getCategoryList',
-            // selectDate:'global/selectDate',
         })
     },
     methods: {
+        getChapters(item){
+            console.log(item)
+            const bookStart = item.bookStart[1]
+            const bookEnd = item.bookEnd[1]
+            if(item.verseEnd && item.verseStart){
+                if(bookStart === bookEnd){
+                    return item.verseEnd[0]-item.verseStart[0]+1
+                }
+                const si = getChapterIndex(bookStart, item.verseStart[0])
+                const ei = getChapterIndex(bookEnd, item.verseEnd[0])
+                return ei-si+1
+            }
+        },
+        totalChaptersOf(catalog, items){
+            let total = 0
+            for(const item of items){
+                if(item.catalog === catalog){
+                    total += item.chapters
+                }
+            }
+            return total
+        },
         insertPreview(){
             if (!this.form.readtime || !this.form.items || !this.form.items[0].verseStart || !this.form.items[0].verseEnd) {
                 this.$store.dispatch('global/showMsg', '必须填写投入时间和读经内容')
@@ -143,6 +166,7 @@ export default {
             }
             this.form.items2 = []
             var ret = true
+            let meditation = 0
             this.form.items.forEach(it => {
                 if(!it.bookStart[1] || !it.bookEnd[1]){
                     this.$store.dispatch('global/showMsg', '必须选择所读的书卷名')
@@ -154,7 +178,8 @@ export default {
                     ret = false
                     return false
                 }
-
+                it.chapters = this.getChapters(it)
+                if(it.catalog ==='默想' || it.catalog === '灵修'){meditation++}
                 this.form.items2.push({
                     catalog:it.catalog,
                     bookStart: it.bookStart[1],
@@ -167,6 +192,8 @@ export default {
 
             if(!ret) return ret
             this.form.items2= JSON.stringify(this.form.items2)
+            this.form.chapters = this.totalChaptersOf('通读', this.form.items)
+            this.form.meditation = meditation
             this.dialogPreviewVisible = true
             return true
         },
@@ -174,7 +201,6 @@ export default {
             if(!this.insertPreview()) return
             this.form.items=[]
             this.dialogPreviewVisible = false
-            // this.form.items2= this.form.items.map(t => t.catalog+"+"+ t.start+"+"+t.end).join("|")
             const { data: { message, code, data} } = await api.post('backend/article/insert', this.form)
             if (code === 200) {
                 this.$store.dispatch('global/showMsg', {
@@ -240,7 +266,6 @@ export default {
         },
         changeSelectedVerseStart(idx) {
             this.form.items[idx].verseEnd = this.form.items[idx].verseStart
-            // console.log(this.form.items[idx].verseEnd[0], this.form.items[idx].verseEnd[1])
         }
     },
     mounted() {
@@ -253,13 +278,11 @@ export default {
 </script>
 
 <style scoped>
-/* .setSign el-form-item{
-    font-size: 15px;
-} */
+
 .setSign .el-row{line-height: 40px;margin-bottom: 5px;}
 .btn-insert-action{ width: 50%;}
 li{
-    text-indent: 0%;
+    text-indent: 0;
     list-style: none;
 }
 </style>

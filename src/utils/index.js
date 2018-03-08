@@ -220,7 +220,10 @@ export const testments2   = [
         simpleName: '创',
         enName: 'Genesis',
         enSimpleName: 'Gen',
-        verseList: [31, 25, 24, 26, 32, 22, 24, 22, 29, 32, 32, 20, 18, 24, 21, 16, 27, 33, 38, 18, 34, 24, 20, 67, 34, 35, 46, 22, 35, 43, 55, 32, 20, 31, 29, 43, 36, 30, 23, 23, 57, 38, 34, 34, 28, 34, 31, 22, 33, 26]
+        verseList: [31, 25, 24, 26, 32, 22, 24, 22, 29, 32, 32, 20, 18, 24, 21, 16, 27, 33, 38, 18, 34, 24, 20, 67, 34, 35, 46, 22, 35, 43, 55, 32, 20, 31, 29, 43, 36, 30, 23, 23, 57, 38, 34, 34, 28, 34, 31, 22, 33, 26],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 2,
@@ -228,7 +231,10 @@ export const testments2   = [
         simpleName: '出',
         enName: 'Exodus',
         enSimpleName: 'Exod',
-        verseList: [22, 25, 22, 31, 23, 30, 25, 32, 35, 29, 10, 51, 22, 31, 27, 36, 16, 27, 25, 26, 36, 31, 33, 18, 40, 37, 21, 43, 46, 38, 18, 35, 23, 35, 35, 38, 29, 31, 43, 38]
+        verseList: [22, 25, 22, 31, 23, 30, 25, 32, 35, 29, 10, 51, 22, 31, 27, 36, 16, 27, 25, 26, 36, 31, 33, 18, 40, 37, 21, 43, 46, 38, 18, 35, 23, 35, 35, 38, 29, 31, 43, 38],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 3,
@@ -236,7 +242,10 @@ export const testments2   = [
         simpleName: '利',
         enName: 'Leviticus',
         enSimpleName: 'Lev',
-        verseList: [17, 16, 17, 35, 19, 30, 38, 36, 24, 20, 47, 8, 59, 57, 33, 34, 16, 30, 37, 27, 24, 33, 44, 23, 55, 46, 34]
+        verseList: [17, 16, 17, 35, 19, 30, 38, 36, 24, 20, 47, 8, 59, 57, 33, 34, 16, 30, 37, 27, 24, 33, 44, 23, 55, 46, 34],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 4,
@@ -244,7 +253,10 @@ export const testments2   = [
         simpleName: '民',
         enName: 'Numbers',
         enSimpleName: 'Num',
-        verseList: [54, 34, 51, 49, 31, 27, 89, 26, 23, 36, 35, 16, 33, 45, 41, 50, 13, 32, 22, 29, 35, 41, 30, 25, 18, 65, 23, 31, 40, 16, 54, 42, 56, 29, 34, 13]
+        verseList: [54, 34, 51, 49, 31, 27, 89, 26, 23, 36, 35, 16, 33, 45, 41, 50, 13, 32, 22, 29, 35, 41, 30, 25, 18, 65, 23, 31, 40, 16, 54, 42, 56, 29, 34, 13],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 5,
@@ -252,7 +264,10 @@ export const testments2   = [
         simpleName: '申',
         enName: 'Deuteronomy',
         enSimpleName: 'Deut',
-        verseList: [46, 37, 29, 49, 33, 25, 26, 20, 29, 22, 32, 32, 18, 29, 23, 22, 20, 22, 21, 20, 23, 30, 25, 22, 19, 19, 26, 68, 29, 20, 30, 52, 29, 12]
+        verseList: [46, 37, 29, 49, 33, 25, 26, 20, 29, 22, 32, 32, 18, 29, 23, 22, 20, 22, 21, 20, 23, 30, 25, 22, 19, 19, 26, 68, 29, 20, 30, 52, 29, 12],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 6,
@@ -260,7 +275,10 @@ export const testments2   = [
         simpleName: '书',
         enName: 'Joshua',
         enSimpleName: 'Josh',
-        verseList: [18, 24, 17, 24, 15, 27, 26, 35, 27, 43, 23, 24, 33, 15, 63, 10, 18, 28, 51, 9, 45, 34, 16, 33]
+        verseList: [18, 24, 17, 24, 15, 27, 26, 35, 27, 43, 23, 24, 33, 15, 63, 10, 18, 28, 51, 9, 45, 34, 16, 33],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 7,
@@ -268,7 +286,10 @@ export const testments2   = [
         simpleName: '士',
         enName: 'Judges',
         enSimpleName: 'Judg',
-        verseList: [36, 23, 31, 24, 31, 40, 25, 35, 57, 18, 40, 15, 25, 20, 20, 31, 13, 31, 30, 48, 25]
+        verseList: [36, 23, 31, 24, 31, 40, 25, 35, 57, 18, 40, 15, 25, 20, 20, 31, 13, 31, 30, 48, 25],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 8,
@@ -276,7 +297,10 @@ export const testments2   = [
         simpleName: '得',
         enName: 'Ruth',
         enSimpleName: 'Ruth',
-        verseList: [22, 23, 18, 22]
+        verseList: [22, 23, 18, 22],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 9,
@@ -284,7 +308,10 @@ export const testments2   = [
         simpleName: '撒上',
         enName: 'I Samuel',
         enSimpleName: '1Sam',
-        verseList: [28, 36, 21, 22, 12, 21, 17, 22, 27, 27, 15, 25, 23, 52, 35, 23, 58, 30, 24, 42, 15, 23, 29, 22, 44, 25, 12, 25, 11, 31, 13]
+        verseList: [28, 36, 21, 22, 12, 21, 17, 22, 27, 27, 15, 25, 23, 52, 35, 23, 58, 30, 24, 42, 15, 23, 29, 22, 44, 25, 12, 25, 11, 31, 13],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 10,
@@ -292,7 +319,10 @@ export const testments2   = [
         simpleName: '撒下',
         enName: 'II Samuel',
         enSimpleName: '2Sam',
-        verseList: [27, 32, 39, 12, 25, 23, 29, 18, 13, 19, 27, 31, 39, 33, 37, 23, 29, 33, 43, 26, 22, 51, 39, 25]
+        verseList: [27, 32, 39, 12, 25, 23, 29, 18, 13, 19, 27, 31, 39, 33, 37, 23, 29, 33, 43, 26, 22, 51, 39, 25],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 11,
@@ -300,7 +330,10 @@ export const testments2   = [
         simpleName: '王上',
         enName: 'I Kings',
         enSimpleName: '1Kgs',
-        verseList: [53, 46, 28, 34, 18, 38, 51, 66, 28, 29, 43, 33, 34, 31, 34, 34, 24, 46, 21, 43, 29, 53]
+        verseList: [53, 46, 28, 34, 18, 38, 51, 66, 28, 29, 43, 33, 34, 31, 34, 34, 24, 46, 21, 43, 29, 53],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 12,
@@ -308,7 +341,10 @@ export const testments2   = [
         simpleName: '王下',
         enName: 'II Kings',
         enSimpleName: '2Kgs',
-        verseList: [18, 25, 27, 44, 27, 33, 20, 29, 37, 36, 21, 21, 25, 29, 38, 20, 41, 37, 37, 21, 26, 20, 37, 20, 30]
+        verseList: [18, 25, 27, 44, 27, 33, 20, 29, 37, 36, 21, 21, 25, 29, 38, 20, 41, 37, 37, 21, 26, 20, 37, 20, 30],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 13,
@@ -316,7 +352,10 @@ export const testments2   = [
         simpleName: '代上',
         enName: 'I Chronicles',
         enSimpleName: '1Chr',
-        verseList: [54, 55, 24, 43, 26, 81, 40, 40, 44, 14, 47, 40, 14, 17, 29, 43, 27, 17, 19, 8, 30, 19, 32, 31, 31, 32, 34, 21, 30]
+        verseList: [54, 55, 24, 43, 26, 81, 40, 40, 44, 14, 47, 40, 14, 17, 29, 43, 27, 17, 19, 8, 30, 19, 32, 31, 31, 32, 34, 21, 30],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 14,
@@ -324,7 +363,10 @@ export const testments2   = [
         simpleName: '代下',
         enName: 'II Chronicles',
         enSimpleName: '2Chr',
-        verseList: [17, 18, 17, 22, 14, 42, 22, 18, 31, 19, 23, 16, 22, 15, 19, 14, 19, 34, 11, 37, 20, 12, 21, 27, 28, 23, 9, 27, 36, 27, 21, 33, 25, 33, 27, 23]
+        verseList: [17, 18, 17, 22, 14, 42, 22, 18, 31, 19, 23, 16, 22, 15, 19, 14, 19, 34, 11, 37, 20, 12, 21, 27, 28, 23, 9, 27, 36, 27, 21, 33, 25, 33, 27, 23],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 15,
@@ -332,7 +374,10 @@ export const testments2   = [
         simpleName: '拉',
         enName: 'Ezra',
         enSimpleName: 'Ezra',
-        verseList: [11, 70, 13, 24, 17, 22, 28, 36, 15, 44]
+        verseList: [11, 70, 13, 24, 17, 22, 28, 36, 15, 44],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 16,
@@ -340,7 +385,10 @@ export const testments2   = [
         simpleName: '尼',
         enName: 'Nehemiah',
         enSimpleName: 'Neh',
-        verseList: [11, 20, 32, 23, 19, 19, 73, 18, 38, 39, 36, 47, 31]
+        verseList: [11, 20, 32, 23, 19, 19, 73, 18, 38, 39, 36, 47, 31],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 17,
@@ -348,7 +396,10 @@ export const testments2   = [
         simpleName: '斯',
         enName: 'Esther',
         enSimpleName: 'Esth',
-        verseList: [22, 23, 15, 17, 14, 14, 10, 17, 32, 3]
+        verseList: [22, 23, 15, 17, 14, 14, 10, 17, 32, 3],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 18,
@@ -356,7 +407,10 @@ export const testments2   = [
         simpleName: '伯',
         enName: 'Job',
         enSimpleName: 'Job',
-        verseList: [22, 13, 26, 21, 27, 30, 21, 22, 35, 22, 20, 25, 28, 22, 35, 22, 16, 21, 29, 29, 34, 30, 17, 25, 6, 14, 23, 28, 25, 31, 40, 22, 33, 37, 16, 33, 24, 41, 30, 24, 34, 17]
+        verseList: [22, 13, 26, 21, 27, 30, 21, 22, 35, 22, 20, 25, 28, 22, 35, 22, 16, 21, 29, 29, 34, 30, 17, 25, 6, 14, 23, 28, 25, 31, 40, 22, 33, 37, 16, 33, 24, 41, 30, 24, 34, 17],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 19,
@@ -364,7 +418,10 @@ export const testments2   = [
         simpleName: '诗',
         enName: 'Psalms',
         enSimpleName: 'Ps',
-        verseList: [6, 12, 8, 8, 12, 10, 17, 9, 20, 18, 7, 8, 6, 7, 5, 11, 15, 50, 14, 9, 13, 31, 6, 10, 22, 12, 14, 9, 11, 12, 24, 11, 22, 22, 28, 12, 40, 22, 13, 17, 13, 11, 5, 26, 17, 11, 9, 14, 20, 23, 19, 9, 6, 7, 23, 13, 11, 11, 17, 12, 8, 12, 11, 10, 13, 20, 7, 35, 36, 5, 24, 20, 28, 23, 10, 12, 20, 72, 13, 19, 16, 8, 18, 12, 13, 17, 7, 18, 52, 17, 16, 15, 5, 23, 11, 13, 12, 9, 9, 5, 8, 28, 22, 35, 45, 48, 43, 13, 31, 7, 10, 10, 9, 8, 18, 19, 2, 29, 176, 7, 8, 9, 4, 8, 5, 6, 5, 6, 8, 8, 3, 18, 3, 3, 21, 26, 9, 8, 24, 13, 10, 7, 12, 15, 21, 10, 20, 14, 9, 6]
+        verseList: [6, 12, 8, 8, 12, 10, 17, 9, 20, 18, 7, 8, 6, 7, 5, 11, 15, 50, 14, 9, 13, 31, 6, 10, 22, 12, 14, 9, 11, 12, 24, 11, 22, 22, 28, 12, 40, 22, 13, 17, 13, 11, 5, 26, 17, 11, 9, 14, 20, 23, 19, 9, 6, 7, 23, 13, 11, 11, 17, 12, 8, 12, 11, 10, 13, 20, 7, 35, 36, 5, 24, 20, 28, 23, 10, 12, 20, 72, 13, 19, 16, 8, 18, 12, 13, 17, 7, 18, 52, 17, 16, 15, 5, 23, 11, 13, 12, 9, 9, 5, 8, 28, 22, 35, 45, 48, 43, 13, 31, 7, 10, 10, 9, 8, 18, 19, 2, 29, 176, 7, 8, 9, 4, 8, 5, 6, 5, 6, 8, 8, 3, 18, 3, 3, 21, 26, 9, 8, 24, 13, 10, 7, 12, 15, 21, 10, 20, 14, 9, 6],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 20,
@@ -372,7 +429,10 @@ export const testments2   = [
         simpleName: '箴',
         enName: 'Proverbs',
         enSimpleName: 'Prov',
-        verseList: [33, 22, 35, 27, 23, 35, 27, 36, 18, 32, 31, 28, 25, 35, 33, 33, 28, 24, 29, 30, 31, 29, 35, 34, 28, 28, 27, 28, 27, 33, 31]
+        verseList: [33, 22, 35, 27, 23, 35, 27, 36, 18, 32, 31, 28, 25, 35, 33, 33, 28, 24, 29, 30, 31, 29, 35, 34, 28, 28, 27, 28, 27, 33, 31],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 21,
@@ -380,7 +440,10 @@ export const testments2   = [
         simpleName: '传',
         enName: 'Ecclesiastes',
         enSimpleName: 'Eccl',
-        verseList: [18, 26, 22, 16, 20, 12, 29, 17, 18, 20, 10, 14]
+        verseList: [18, 26, 22, 16, 20, 12, 29, 17, 18, 20, 10, 14],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 22,
@@ -388,7 +451,10 @@ export const testments2   = [
         simpleName: '歌',
         enName: 'Song of Solomon',
         enSimpleName: 'Song',
-        verseList: [17, 17, 11, 16, 16, 13, 13, 14]
+        verseList: [17, 17, 11, 16, 16, 13, 13, 14],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 23,
@@ -396,7 +462,10 @@ export const testments2   = [
         simpleName: '赛',
         enName: 'Isaiah',
         enSimpleName: 'Isa',
-        verseList: [31, 22, 26, 6, 30, 13, 25, 22, 21, 34, 16, 6, 22, 32, 9, 14, 14, 7, 25, 6, 17, 25, 18, 23, 12, 21, 13, 29, 24, 33, 9, 20, 24, 17, 10, 22, 38, 22, 8, 31, 29, 25, 28, 28, 25, 13, 15, 22, 26, 11, 23, 15, 12, 17, 13, 12, 21, 14, 21, 22, 11, 12, 19, 12, 25, 24]
+        verseList: [31, 22, 26, 6, 30, 13, 25, 22, 21, 34, 16, 6, 22, 32, 9, 14, 14, 7, 25, 6, 17, 25, 18, 23, 12, 21, 13, 29, 24, 33, 9, 20, 24, 17, 10, 22, 38, 22, 8, 31, 29, 25, 28, 28, 25, 13, 15, 22, 26, 11, 23, 15, 12, 17, 13, 12, 21, 14, 21, 22, 11, 12, 19, 12, 25, 24],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 24,
@@ -404,7 +473,10 @@ export const testments2   = [
         simpleName: '耶',
         enName: 'Jeremiah',
         enSimpleName: 'Jer',
-        verseList: [19, 37, 25, 31, 31, 30, 34, 22, 26, 25, 23, 17, 27, 22, 21, 21, 27, 23, 15, 18, 14, 30, 40, 10, 38, 24, 22, 17, 32, 24, 40, 44, 26, 22, 19, 32, 21, 28, 18, 16, 18, 22, 13, 30, 5, 28, 7, 47, 39, 46, 64, 34]
+        verseList: [19, 37, 25, 31, 31, 30, 34, 22, 26, 25, 23, 17, 27, 22, 21, 21, 27, 23, 15, 18, 14, 30, 40, 10, 38, 24, 22, 17, 32, 24, 40, 44, 26, 22, 19, 32, 21, 28, 18, 16, 18, 22, 13, 30, 5, 28, 7, 47, 39, 46, 64, 34],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 25,
@@ -412,7 +484,10 @@ export const testments2   = [
         simpleName: '哀',
         enName: 'Lamentations',
         enSimpleName: 'Lam',
-        verseList: [22, 22, 66, 22, 22]
+        verseList: [22, 22, 66, 22, 22],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 26,
@@ -420,7 +495,10 @@ export const testments2   = [
         simpleName: '结',
         enName: 'Ezekiel',
         enSimpleName: 'Ezek',
-        verseList: [28, 10, 27, 17, 17, 14, 27, 18, 11, 22, 25, 28, 23, 23, 8, 63, 24, 32, 14, 49, 32, 31, 49, 27, 17, 21, 36, 26, 21, 26, 18, 32, 33, 31, 15, 38, 28, 23, 29, 49, 26, 20, 27, 31, 25, 24, 23, 35]
+        verseList: [28, 10, 27, 17, 17, 14, 27, 18, 11, 22, 25, 28, 23, 23, 8, 63, 24, 32, 14, 49, 32, 31, 49, 27, 17, 21, 36, 26, 21, 26, 18, 32, 33, 31, 15, 38, 28, 23, 29, 49, 26, 20, 27, 31, 25, 24, 23, 35],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 27,
@@ -428,7 +506,10 @@ export const testments2   = [
         simpleName: '但',
         enName: 'Daniel',
         enSimpleName: 'Dan',
-        verseList: [21, 49, 30, 37, 31, 28, 28, 27, 27, 21, 45, 13]
+        verseList: [21, 49, 30, 37, 31, 28, 28, 27, 27, 21, 45, 13],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 28,
@@ -436,7 +517,10 @@ export const testments2   = [
         simpleName: '何',
         enName: 'Hosea',
         enSimpleName: 'Hos',
-        verseList: [11, 23, 5, 19, 15, 11, 16, 14, 17, 15, 12, 14, 16, 9]
+        verseList: [11, 23, 5, 19, 15, 11, 16, 14, 17, 15, 12, 14, 16, 9],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 29,
@@ -444,7 +528,10 @@ export const testments2   = [
         simpleName: '珥',
         enName: 'Joel',
         enSimpleName: 'Joel',
-        verseList: [20, 32, 21]
+        verseList: [20, 32, 21],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 30,
@@ -452,7 +539,10 @@ export const testments2   = [
         simpleName: '摩',
         enName: 'Amos',
         enSimpleName: 'Amos',
-        verseList: [15, 16, 15, 13, 27, 14, 17, 14, 15]
+        verseList: [15, 16, 15, 13, 27, 14, 17, 14, 15],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 31,
@@ -460,7 +550,10 @@ export const testments2   = [
         simpleName: '俄',
         enName: 'Obadiah',
         enSimpleName: 'Obad',
-        verseList: [21]
+        verseList: [21],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 32,
@@ -468,7 +561,10 @@ export const testments2   = [
         simpleName: '拿',
         enName: 'Jonah',
         enSimpleName: 'Jonah',
-        verseList: [17, 10, 10, 11]
+        verseList: [17, 10, 10, 11],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 33,
@@ -476,7 +572,10 @@ export const testments2   = [
         simpleName: '弥',
         enName: 'Micah',
         enSimpleName: 'Mic',
-        verseList: [16, 13, 12, 13, 15, 16, 20]
+        verseList: [16, 13, 12, 13, 15, 16, 20],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 34,
@@ -484,7 +583,10 @@ export const testments2   = [
         simpleName: '鸿',
         enName: 'Nahum',
         enSimpleName: 'Nah',
-        verseList: [15, 13, 19]
+        verseList: [15, 13, 19],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 35,
@@ -492,7 +594,10 @@ export const testments2   = [
         simpleName: '哈',
         enName: 'Habakkuk',
         enSimpleName: 'Hab',
-        verseList: [17, 20, 19]
+        verseList: [17, 20, 19],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 36,
@@ -500,7 +605,10 @@ export const testments2   = [
         simpleName: '番',
         enName: 'Zephaniah',
         enSimpleName: 'Zeph',
-        verseList: [18, 15, 20]
+        verseList: [18, 15, 20],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 37,
@@ -508,7 +616,10 @@ export const testments2   = [
         simpleName: '该',
         enName: 'Haggai',
         enSimpleName: 'Hag',
-        verseList: [15, 23]
+        verseList: [15, 23],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 38,
@@ -516,7 +627,10 @@ export const testments2   = [
         simpleName: '亚',
         enName: 'Zechariah',
         enSimpleName: 'Zech',
-        verseList: [21, 13, 10, 14, 11, 15, 14, 23, 17, 12, 17, 14, 9, 21]
+        verseList: [21, 13, 10, 14, 11, 15, 14, 23, 17, 12, 17, 14, 9, 21],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 39,
@@ -524,7 +638,10 @@ export const testments2   = [
         simpleName: '玛',
         enName: 'Malachi',
         enSimpleName: 'Mal',
-        verseList: [14, 17, 18, 6]
+        verseList: [14, 17, 18, 6],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 40,
@@ -532,7 +649,10 @@ export const testments2   = [
         simpleName: '太',
         enName: 'Matthew',
         enSimpleName: 'Matt',
-        verseList: [25, 23, 17, 25, 48, 34, 29, 34, 38, 42, 30, 50, 58, 36, 39, 28, 27, 35, 30, 34, 46, 46, 39, 51, 46, 75, 66, 20]
+        verseList: [25, 23, 17, 25, 48, 34, 29, 34, 38, 42, 30, 50, 58, 36, 39, 28, 27, 35, 30, 34, 46, 46, 39, 51, 46, 75, 66, 20],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 41,
@@ -540,7 +660,10 @@ export const testments2   = [
         simpleName: '可',
         enName: 'Mark',
         enSimpleName: 'Mark',
-        verseList: [45, 28, 35, 41, 43, 56, 37, 38, 50, 52, 33, 44, 37, 72, 47, 20]
+        verseList: [45, 28, 35, 41, 43, 56, 37, 38, 50, 52, 33, 44, 37, 72, 47, 20],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 42,
@@ -548,7 +671,10 @@ export const testments2   = [
         simpleName: '路',
         enName: 'Luke',
         enSimpleName: 'Luke',
-        verseList: [80, 52, 38, 44, 39, 49, 50, 56, 62, 42, 54, 59, 35, 35, 32, 31, 37, 43, 48, 47, 38, 71, 56, 53]
+        verseList: [80, 52, 38, 44, 39, 49, 50, 56, 62, 42, 54, 59, 35, 35, 32, 31, 37, 43, 48, 47, 38, 71, 56, 53],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 43,
@@ -556,7 +682,10 @@ export const testments2   = [
         simpleName: '约',
         enName: 'John',
         enSimpleName: 'John',
-        verseList: [51, 25, 36, 54, 47, 71, 53, 59, 41, 42, 57, 50, 38, 31, 27, 33, 26, 40, 42, 31, 25]
+        verseList: [51, 25, 36, 54, 47, 71, 53, 59, 41, 42, 57, 50, 38, 31, 27, 33, 26, 40, 42, 31, 25],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 44,
@@ -564,7 +693,10 @@ export const testments2   = [
         simpleName: '徒',
         enName: 'Acts',
         enSimpleName: 'Acts',
-        verseList: [26, 47, 26, 37, 42, 15, 60, 40, 43, 48, 30, 25, 52, 28, 41, 40, 34, 28, 41, 38, 40, 30, 35, 27, 27, 32, 44, 31]
+        verseList: [26, 47, 26, 37, 42, 15, 60, 40, 43, 48, 30, 25, 52, 28, 41, 40, 34, 28, 41, 38, 40, 30, 35, 27, 27, 32, 44, 31],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 45,
@@ -572,7 +704,10 @@ export const testments2   = [
         simpleName: '罗',
         enName: 'Romans',
         enSimpleName: 'Rom',
-        verseList: [32, 29, 31, 25, 21, 23, 25, 39, 33, 21, 36, 21, 14, 23, 33, 27]
+        verseList: [32, 29, 31, 25, 21, 23, 25, 39, 33, 21, 36, 21, 14, 23, 33, 27],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 46,
@@ -580,7 +715,10 @@ export const testments2   = [
         simpleName: '林前',
         enName: 'I Corinthians',
         enSimpleName: '1Cor',
-        verseList: [31, 16, 23, 21, 13, 20, 40, 13, 27, 33, 34, 31, 13, 40, 58, 24]
+        verseList: [31, 16, 23, 21, 13, 20, 40, 13, 27, 33, 34, 31, 13, 40, 58, 24],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 47,
@@ -588,7 +726,10 @@ export const testments2   = [
         simpleName: '林后',
         enName: 'II Corinthians',
         enSimpleName: '2Cor',
-        verseList: [24, 17, 18, 18, 21, 18, 16, 24, 15, 18, 33, 21, 14]
+        verseList: [24, 17, 18, 18, 21, 18, 16, 24, 15, 18, 33, 21, 14],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 48,
@@ -596,7 +737,10 @@ export const testments2   = [
         simpleName: '加',
         enName: 'Galatians',
         enSimpleName: 'Gal',
-        verseList: [24, 21, 29, 31, 26, 18]
+        verseList: [24, 21, 29, 31, 26, 18],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 49,
@@ -604,7 +748,10 @@ export const testments2   = [
         simpleName: '弗',
         enName: 'Ephesians',
         enSimpleName: 'Eph',
-        verseList: [23, 22, 21, 32, 33, 24]
+        verseList: [23, 22, 21, 32, 33, 24],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 50,
@@ -612,7 +759,10 @@ export const testments2   = [
         simpleName: '腓',
         enName: 'Philippians',
         enSimpleName: 'Phil',
-        verseList: [30, 30, 21, 23]
+        verseList: [30, 30, 21, 23],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 51,
@@ -620,7 +770,10 @@ export const testments2   = [
         simpleName: '西',
         enName: 'Colossians',
         enSimpleName: 'Col',
-        verseList: [29, 23, 25, 18]
+        verseList: [29, 23, 25, 18],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 52,
@@ -628,7 +781,10 @@ export const testments2   = [
         simpleName: '帖前',
         enName: 'I Thessalonians',
         enSimpleName: '1Thess',
-        verseList: [10, 20, 13, 18, 28]
+        verseList: [10, 20, 13, 18, 28],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 53,
@@ -636,7 +792,10 @@ export const testments2   = [
         simpleName: '帖后',
         enName: 'II Thessalonians',
         enSimpleName: '2Thess',
-        verseList: [12, 17, 18]
+        verseList: [12, 17, 18],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 54,
@@ -644,7 +803,10 @@ export const testments2   = [
         simpleName: '提前',
         enName: 'I Timothy',
         enSimpleName: '1Tim',
-        verseList: [20, 15, 16, 16, 25, 21]
+        verseList: [20, 15, 16, 16, 25, 21],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 55,
@@ -652,7 +814,10 @@ export const testments2   = [
         simpleName: '提后',
         enName: 'II Timothy',
         enSimpleName: '2Tim',
-        verseList: [18, 26, 17, 22]
+        verseList: [18, 26, 17, 22],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 56,
@@ -660,7 +825,10 @@ export const testments2   = [
         simpleName: '多',
         enName: 'Titus',
         enSimpleName: 'Titus',
-        verseList: [16, 15, 15]
+        verseList: [16, 15, 15],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 57,
@@ -668,7 +836,10 @@ export const testments2   = [
         simpleName: '门',
         enName: 'Philemon',
         enSimpleName: 'Phlm',
-        verseList: [25]
+        verseList: [25],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 58,
@@ -676,7 +847,10 @@ export const testments2   = [
         simpleName: '来',
         enName: 'Hebrews',
         enSimpleName: 'Heb',
-        verseList: [14, 18, 19, 16, 14, 20, 28, 13, 28, 39, 40, 29, 25]
+        verseList: [14, 18, 19, 16, 14, 20, 28, 13, 28, 39, 40, 29, 25],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 59,
@@ -684,7 +858,10 @@ export const testments2   = [
         simpleName: '雅',
         enName: 'James',
         enSimpleName: 'Jas',
-        verseList: [27, 26, 18, 17, 20]
+        verseList: [27, 26, 18, 17, 20],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 60,
@@ -692,7 +869,10 @@ export const testments2   = [
         simpleName: '彼前',
         enName: 'I Peter',
         enSimpleName: '1Pet',
-        verseList: [25, 25, 22, 19, 14]
+        verseList: [25, 25, 22, 19, 14],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 61,
@@ -700,7 +880,10 @@ export const testments2   = [
         simpleName: '彼后',
         enName: 'II Peter',
         enSimpleName: '2Pet',
-        verseList: [21, 22, 18]
+        verseList: [21, 22, 18],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 62,
@@ -708,7 +891,10 @@ export const testments2   = [
         simpleName: '约壹',
         enName: 'I John',
         enSimpleName: '1John',
-        verseList: [10, 29, 24, 21, 21]
+        verseList: [10, 29, 24, 21, 21],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 63,
@@ -716,7 +902,10 @@ export const testments2   = [
         simpleName: '约贰',
         enName: 'II John',
         enSimpleName: '2John',
-        verseList: [13]
+        verseList: [13],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 64,
@@ -724,7 +913,10 @@ export const testments2   = [
         simpleName: '约叁',
         enName: 'III John',
         enSimpleName: '3John',
-        verseList: [14]
+        verseList: [14],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 65,
@@ -732,7 +924,10 @@ export const testments2   = [
         simpleName: '犹',
         enName: 'Jude',
         enSimpleName: 'Jude',
-        verseList: [25]
+        verseList: [25],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     },
     {
         index: 66,
@@ -740,7 +935,10 @@ export const testments2   = [
         simpleName: '启',
         enName: 'Revelation of John',
         enSimpleName: 'Rev',
-        verseList: [20, 29, 22, 11, 14, 17, 17, 13, 21, 11, 19, 17, 18, 20, 8, 21, 18, 24, 21, 15, 27, 21]
+        verseList: [20, 29, 22, 11, 14, 17, 17, 13, 21, 11, 19, 17, 18, 20, 8, 21, 18, 24, 21, 15, 27, 21],
+        chapterOffset:0,
+        verseOffset: 0,
+        offsetList: []
     }
 ]
 export const findBook = name => {
@@ -751,11 +949,10 @@ export const updateBookOffset = () => {
     let bookTotalLen = 0
     let totalChapterOffset = 0
     for(const book of testments2){
-        if(book.offsetList === undefined){
+        if(book.offsetList.length===0){
             book.verseOffset = bookTotalLen
             book.chapterOffset = totalChapterOffset
             totalChapterOffset += book.verseList.length
-            book.offsetList = []
             let totalLen = 0
             for(const len of book.verseList){
                 book.offsetList.push(totalLen+bookTotalLen)
@@ -773,7 +970,8 @@ export function getVerseIndex(bookName, chapter, verse) {
 }
 
 export function getChapterIndex(bookName, chapter) {
-    const book = findBook(bookName)
     updateBookOffset()
+    console.log(bookName)
+    const book = findBook(bookName)
     return book.chapterOffset + chapter
 }

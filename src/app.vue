@@ -10,7 +10,7 @@
     </template>
 </div>
 </template>
-<script lang="babel">
+<script lang="babel" type="text/babel">
 
 import Vue from 'vue'
 import Element from 'element-ui'
@@ -25,7 +25,9 @@ import Navigation from './components/navigation.vue'
 import signUp from './components/signup.vue'
 import signIn from './components/signin.vue'
 // import Calendar from './components/calendar.vue'
+import VueClipboard from 'vue-clipboard2'
 
+Vue.use(VueClipboard)
 Vue.use(Element)
 // Vue.use(Calendar)
 

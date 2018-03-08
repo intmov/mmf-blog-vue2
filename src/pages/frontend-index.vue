@@ -116,8 +116,6 @@ export default {
             console.log('change month!'+data)
             const username = cookies.get('username')
             const base = {limit: 1000, date: moment(data,dateformat).format("YYYY-MM"), user:username}
-            // store.dispatch('global/category/getCategoryList')
-            // store.dispatch('frontend/article/getTrending')
             this.$store.dispatch('frontend/article/getMonthList', base)
 
         },
@@ -132,15 +130,6 @@ export default {
             }
             fetchInitialData(this.$store,{page:1})
         }
-        // async getUser() {
-        //     const { data: { code, data} } = await api.get('frontend/user/account')
-        //     if (code === 200) {
-        //         this.user = data.username
-        //     }
-        //     if(!this.user){
-        //         this.login()
-        //     }
-        // }
     },
     mounted() {
         fetchInitialData(this.$store, {page: 1})
@@ -161,8 +150,8 @@ export default {
 }
 </script>
 <style scoped>
-.sep{
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
+    .sep{
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
 </style>
