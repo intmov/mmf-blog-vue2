@@ -30,7 +30,7 @@
                 :data="summaryData" border  style="width: 100%">
                 <el-table-column label="#"  type="index"   width="40"> </el-table-column>
                 <!--<el-table-column prop="rank"        label="#"    width="40"> </el-table-column>-->
-                <el-table-column label="用戶" width="80" sortable sort-by="user">
+                <el-table-column label="用戶" width="80" sortable sort-by="update_date">
                     <template slot-scope="scope">
                         <div style="display: block">{{ scope.row.user }}</div>
                         <div style="color: #aaa; font-size:9pt;">{{ scope.row.update_date.substr(11,9)}}</div>
