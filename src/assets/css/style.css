@@ -545,6 +545,7 @@ a {
 .feed .feed-time {
     float: right;
     font-size: 14px;
+    color: #aaa;
 }
 
 .feed .feed-minor-link {
