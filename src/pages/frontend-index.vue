@@ -114,14 +114,14 @@ export default {
         },
         changeMonth(data){
             console.log('change month!'+data)
-            const username = cookies.get('username')
-            const base = {limit: 1000, date: moment(data,dateformat).format("YYYY-MM"), user:username}
+            const userid = cookies.get('userid')
+            const base = {limit: 1000, date: moment(data,dateformat).format("YYYY-MM"), user:userid}
             this.$store.dispatch('frontend/article/getMonthList', base)
 
         },
         async deletePost(){
-            const username2 = cookies.get('username')
-            const { data: { code, message} } = await api.get('backend/article/delete', { date:now, username:username2 })
+            const username2 = cookies.get('userid')
+            const { data: { code, message} } = await api.get('backend/article/delete', { date:now, userid:username2 })
             if (code === 200) {
                 this.$store.dispatch('global/showMsg', {
                     type: 'success',

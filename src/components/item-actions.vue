@@ -46,13 +46,13 @@ export default {
                 let catalog = ''
                 if(item.catalog !=='通读') catalog = item.catalog
                 if(item.bookStart === item.bookEnd){
-                    message += `${catalog}${item.bookStart}${this.getVerse(item.verseStart)}-${this.getVerse(item.verseEnd)} `
+                    message += `${catalog}${item.bookStart}${this.getVerse(item.verseStart)}-${this.getVerse(item.verseEnd)}、`
                 }else{
-                    message += `${catalog}${item.bookStart}${this.getVerse(item.verseStart)}-${item.bookEnd}${this.getVerse(item.verseEnd)} `
+                    message += `${catalog}${item.bookStart}${this.getVerse(item.verseStart)}-${item.bookEnd}${this.getVerse(item.verseEnd)}、`
                 }
             }
-
-            message += "共"+this.item.chapters+"章"
+            if(message.endsWith("、")) message = message.substr(0,message.length-1)
+            message += "，共"+this.item.chapters+"章"
 
             this.$copyText(message).then(e => {
                 this.$store.dispatch('global/showMsg',{

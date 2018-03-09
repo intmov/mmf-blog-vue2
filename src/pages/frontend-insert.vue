@@ -93,6 +93,7 @@ import { mapGetters } from 'vuex'
 import aInput from '../components/_input.vue'
 import {bookOptions, getChapterIndex, testments} from '../utils'
 import topicsItem from '../components/topics-item.vue'
+import cookies from 'js-cookie'
 
 const fetchInitialData = async (store, config = { limit: 99}) => {
     await store.dispatch('global/category/getCategoryList', config)
@@ -121,7 +122,9 @@ export default {
                     chapters: "1"},
                 ],
                 items2:"",
-                user: '',
+                readtime2:0,
+                userid: '',
+                username:'',
                 date: localStorage.selectDate,
                 chapters: 0,
                 meditation: 0
@@ -194,12 +197,17 @@ export default {
             this.form.items2= JSON.stringify(this.form.items2)
             this.form.chapters = this.totalChaptersOf('通读', this.form.items)
             this.form.meditation = meditation
+            this.form.userid = decodeURIComponent(cookies.get("userid"))
+            this.form.username = decodeURIComponent(cookies.get("username"))
+            this.form.readtime2 = parseInt(this.form.readtime.substr(0,2),10)*60+parseInt(this.form.readtime.substr(3,2),10)
             this.dialogPreviewVisible = true
             return true
         },
         async insert() {
             if(!this.insertPreview()) return
+            localStorage.lastActivity = JSON.stringify(this.form.items)
             this.form.items=[]
+
             this.dialogPreviewVisible = false
             const { data: { message, code, data} } = await api.post('backend/article/insert', this.form)
             if (code === 200) {
@@ -210,12 +218,6 @@ export default {
                 this.$store.commit('backend/article/insertArticleItem', data)
                 await this.$store.dispatch('frontend/article/getArticleList')
                 this.$router.push('/')
-            }
-        },
-        async getUser() {
-            const { data: { code, data} } = await api.get('frontend/user/account')
-            if (code === 200) {
-                this.form.user = data.username
             }
         },
         cancel(){
@@ -269,7 +271,26 @@ export default {
         }
     },
     mounted() {
-        this.getUser()
+        if(localStorage.lastActivity != null){
+            const items = JSON.parse(localStorage.lastActivity)
+            this.options.pop()
+            this.form.items.pop()
+            for (const idx in items){
+                const item = items[idx]
+                this.options.push({
+                    verseStartOptions: this.formVerseOptions(item.bookEnd[1]),
+                    verseEndOptions: this.formVerseOptions(item.bookEnd[1])
+                })
+                this.form.items.push({
+                    catalog: item.catalog,
+                    bookStart: item.bookEnd,
+                    bookEnd: item.bookEnd,
+                    verseStart: item.verseEnd,
+                    verseEnd: item.verseEnd,
+                    chapters: item.chapters,
+                })
+            }
+        }
         if (this.category.length <= 0) {
             fetchInitialData(this.$store)
         }
