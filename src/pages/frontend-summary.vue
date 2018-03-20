@@ -37,14 +37,22 @@
                         <div v-else style="color: #aaa; font-size:9pt;">{{ scope.row.update_date.substr(0,10)}}</div>
                     </template>
                 </el-table-column>
-                <el-table-column prop="days" label="打卡" sortable> </el-table-column>
-                <el-table-column label="读经" sortable sort-by="chapters">
+                <el-table-column prop="days" label="打卡" sortable>
                     <template slot-scope="scope">
-                        <div style="display: block;font-size:9pt;">共<span style="font-size:11pt;color:purple;">{{ scope.row.chapters }}</span> 章</div>
-                        <div v-if="scope.row.meditation >= 0" style="font-size:9pt;">默想 <span style="font-size:10pt;color:purple;">{{ scope.row.meditation }}</span> 次</div>
+                        <div style="display: block;font-size:9pt;"> <span style="font-size:11pt;color:purple;">{{ scope.row.days }}</span> </div>
                     </template>
                 </el-table-column>
-                <el-table-column prop="readtime"  label="用时" sortable> </el-table-column>
+                <el-table-column label="读经" sortable sort-by="chapters">
+                    <template slot-scope="scope">
+                        <div style="display: block;font-size:9pt;">共 <span style="font-size:11pt;color:purple;">{{ scope.row.chapters }}</span> 章</div>
+                        <div v-if="scope.row.meditation > 0" style="font-size:9pt;">默想 <span style="font-size:10pt;color:purple;">{{ scope.row.meditation }}</span> 次</div>
+                    </template>
+                </el-table-column>
+                <el-table-column label="用时" sortable>
+                    <template slot-scope="scope">
+                        <div style="display: block;font-size:9pt;"> <span style="font-size:11pt;color:purple;">{{ scope.row.readtime }}</span> 分钟</div>
+                    </template>
+                </el-table-column>
             </el-table>
         </div>
     </div>
