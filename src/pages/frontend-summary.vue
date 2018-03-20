@@ -1,19 +1,19 @@
-<template>
-    <div class="main">
+<template >
+    <div class="main" align="center">
         <div>
             <el-radio-group v-model="rangeOption" @change="changeRange">
-                <el-radio style="margin-left: 10px;" label="day" border>当天</el-radio>
-                <el-radio label="week" border>本周</el-radio>
-                <el-radio label="month" border>本月</el-radio>
-                <el-radio label="user" border>任意</el-radio>
+                <el-radio class="radio" label="day"   border>当天</el-radio>
+                <el-radio class="radio" label="week"  border>本周</el-radio>
+                <el-radio class="radio" label="month" border>本月</el-radio>
+                <el-radio class="radio" label="user"  border>任意</el-radio>
             </el-radio-group>
             <el-form v-if="rangeOption === 'user'" >
                 <el-form-item>
-                    <el-row>
-                        <el-col :span="10">
+                    <el-row style="margin-top:10px;" type="flex" justify="center">
+                        <el-col :span="9">
                             <el-date-picker v-model="startDate" style="width: 100%;" id="a1" type="date" placeholder="开始日期" />
                         </el-col>
-                        <el-col :span="10">
+                        <el-col :span="9">
                             <el-date-picker v-model="endDate" style="width: 100%;"  id="a2" type="date" placeholder="结束日期" />
                         </el-col>
                         <el-col :span="4">
@@ -25,21 +25,26 @@
 
 
         </div>
-        <div class="summary">
-            <el-table
-                :data="summaryData" border  style="width: 100%">
+        <div class="summary" align="center">
+            <el-table stripe
+                :data="summaryData" border style="background:transparent;">
                 <el-table-column label="#"  type="index"   width="40"> </el-table-column>
                 <!--<el-table-column prop="rank"        label="#"    width="40"> </el-table-column>-->
-                <el-table-column label="用戶" width="80" sortable sort-by="update_date">
+                <el-table-column label="用戶" width="85" sortable sort-by="update_date">
                     <template slot-scope="scope">
                         <div style="display: block">{{ scope.row.user }}</div>
-                        <div style="color: #aaa; font-size:9pt;">{{ scope.row.update_date.substr(11,9)}}</div>
+                        <div v-if="rangeOption == 'day'" style="color: #aaa; font-size:9pt;">{{ scope.row.update_date.substr(11,9)}}</div>
+                        <div v-else style="color: #aaa; font-size:9pt;">{{ scope.row.update_date.substr(0,10)}}</div>
                     </template>
                 </el-table-column>
-                <el-table-column prop="days"        label="打卡" width="50" sortable> </el-table-column>
-                <el-table-column prop="chapters"    label="章数" width="50" sortable> </el-table-column>
-                <el-table-column prop="meditation"  label="默想" width="50" sortable> </el-table-column>
-                <el-table-column prop="readtime"    label="用时" sortable> </el-table-column>
+                <el-table-column prop="days" label="打卡" sortable> </el-table-column>
+                <el-table-column label="读经" sortable sort-by="chapters">
+                    <template slot-scope="scope">
+                        <div style="display: block;font-size:9pt;">共<span style="font-size:11pt;color:purple;">{{ scope.row.chapters }}</span> 章</div>
+                        <div v-if="scope.row.meditation >= 0" style="font-size:9pt;">默想 <span style="font-size:10pt;color:purple;">{{ scope.row.meditation }}</span> 次</div>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="readtime"  label="用时" sortable> </el-table-column>
             </el-table>
         </div>
     </div>
@@ -95,11 +100,17 @@
     .summary{
         margin-top: 10px;
         width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        align-content: center;
     }
 
     .date_text{
         color: #666;
         font-size: small;
         display: block;
+    }
+    .radio{
+        width: 70px;
     }
 </style>

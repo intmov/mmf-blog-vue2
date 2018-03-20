@@ -114,6 +114,7 @@ export default {
             fetchInitialData(this.$store, {page})
         },
         clickTodayMonth(data){
+            localStorage.selectDate = data
             now = data
             //this.clickDay(data)
         },
