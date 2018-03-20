@@ -165,6 +165,11 @@ export default {
 }
 </script>
 <style scoped>
+    .main{
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
     .sep{
         margin-top: 5px;
         margin-bottom: 5px;

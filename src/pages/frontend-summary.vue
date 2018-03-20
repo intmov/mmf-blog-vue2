@@ -25,7 +25,7 @@
 
 
         </div>
-        <div class="summary" align="center">
+        <div class="summary">
             <el-table stripe
                 :data="summaryData" border style="background:transparent;">
                 <el-table-column label="#"  type="index"   width="40"> </el-table-column>
@@ -105,6 +105,11 @@
     }
 </script>
 <style scoped>
+    .main{
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
     .summary{
         margin-top: 10px;
         width: 100%;

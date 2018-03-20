@@ -194,7 +194,7 @@ export default {
   padding: 0;
 }
 .wh_container {
-  max-width: 410px;
+  max-width: 600px;
   margin: auto;
 }
 li {

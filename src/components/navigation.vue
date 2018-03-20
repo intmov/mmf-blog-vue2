@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="header">
         <!-- 头部导航 -->
         <header class="header" :class="{ 'header-fixed' : true }">
         <el-row>
@@ -42,8 +42,14 @@ export default {
 }
 </script>
 <style scoped>
-.text{
-    margin-left: 5px;
-}
+    .header{
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .text{
+        margin-left: 5px;
+    }
 </style>
 
