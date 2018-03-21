@@ -51,7 +51,7 @@ const router = new VueRouter({
         { name:'summary', path: '/summary', component: summary, meta: { scrollToTop: true }, beforeEnter: guardRoute },
         { name:'article', path: '/article/:id', component: article, meta: { scrollToTop: true } },
         { name:'about', path: '/about', component: about, meta: { scrollToTop: true } },
-        { name:'account', path: '/user/account', component: account, meta: { scrollToTop: true }, beforeEnter: guardRoute },
+        { name:'account', path: '/user/account/:id', component: account, meta: { scrollToTop: true }, beforeEnter: guardRoute },
         { name:'password', path: '/user/password', component: password, meta: { scrollToTop: true }, beforeEnter: guardRoute }
     ]
 })

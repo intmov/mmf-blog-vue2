@@ -2,7 +2,7 @@
 
     <div class="settings-main card">
          <el-form ref="form" :model="form"  @submit.prevent="onSubmit" >
-            <div class='article-title'>为{{form.date}}打卡：</div>
+            <div class='article-title'>为<span style="color: purple;"> {{form.date}} </span>打卡：</div>
              <el-form-item label="投入时间" label-width="80px" class="setSign">
                  <el-col :span="18">
                     <el-time-picker type="fixed-time"  value-format="HH:mm"  format="HH小时-mm分钟"  placeholder="选择时间" v-model="form.readtime" style="width: 100%;"></el-time-picker>
@@ -306,4 +306,16 @@ li{
     text-indent: 0;
     list-style: none;
 }
+.settings-main{
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 10px;
+}
+    .article-title{
+        margin-bottom: 10px;
+        margin-left: 5px;
+    }
 </style>

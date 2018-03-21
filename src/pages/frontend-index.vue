@@ -125,8 +125,7 @@ export default {
         },
         changeMonth(data){
             console.log('change month!'+data)
-            const userid = cookies.get('userid')
-            const base = {limit: 1000, date: moment(data,dateformat).format("YYYY-MM"), user:userid}
+            const base = {limit: 1000, date: moment(data,dateformat).format("YYYY-MM"), user:this.user}
             this.$store.dispatch('frontend/article/getMonthList', base)
 
         },

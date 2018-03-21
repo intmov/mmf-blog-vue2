@@ -32,7 +32,7 @@
                 <!--<el-table-column prop="rank"        label="#"    width="40"> </el-table-column>-->
                 <el-table-column label="用戶" width="85" sortable sort-by="update_date">
                     <template slot-scope="scope">
-                        <div style="display: block">{{ scope.row.user }}</div>
+                        <a :href="'/user/account/'+ scope.row.user"><div style="display: block">{{ scope.row.user }}</div></a>
                         <div v-if="rangeOption == 'day'" style="color: #aaa; font-size:9pt;">{{ scope.row.update_date.substr(11,9)}}</div>
                         <div v-else style="color: #aaa; font-size:9pt;">{{ scope.row.update_date.substr(0,10)}}</div>
                     </template>
@@ -75,6 +75,7 @@
                 summaryData: [{
                     rank: '1',
                     user: '王小虎',
+                    userid: '1',
                     chapters: 20,
                     meditation: 20,
                     days: 150,

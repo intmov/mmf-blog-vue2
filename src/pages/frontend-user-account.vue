@@ -3,24 +3,17 @@
             <div class="card card-answer">
                 <div class="answer-content">
                     <div class="article-content">
-                        <h3 class="about-title">您好，{{form.username.substr(1,5)}}
+                        <h3 class="about-title" v-if="isSelf">您好，{{form.username}}
                             <div style="float: right">
                                 <el-button @click="changePassword"><i class="el-icon-edit-outline"></i> 密码</el-button>
                                 <el-button @click="handleLogout"><i class="el-icon-upload2"></i> 登出</el-button>
                             </div>
                         </h3>
-                        </div>
+                        <h3 class="about-title" v-else>欢迎来到 {{$route.params.id}} 的空间 </h3>
+                    </div>
                 </div>
-
             </div>
             <div class="home-feeds cards-wrap">
-<!--
-                <el-row style="margin-bottom: 5px;" type="flex" justify="center">
-                    <div class="sepline">
-                        <span>= = 最近打卡情况 = =</span>
-                    </div>
-                </el-row>
--->
                 <topics-item-none v-if="!topics.path">加载中, 请稍等...</topics-item-none>
                 <template v-else-if="topics.data.length > 0">
                     <topics-item :actionVisible="true" :selfView="true" v-for="item in topics.data" :item="item" :key="item._id"></topics-item>
@@ -28,20 +21,7 @@
                 </template>
                 <topics-item-none v-else>当前没有打卡记录...</topics-item-none>
             </div>
-            <!--<div class="home-feeds cards-wrap">
-                <div class="settings-main card">
-                    <div class="settings-main-content">
-                        <a-input title="昵称">
-                            <input type="text" v-model="form.username" placeholder="昵称" class="base-input" name="username" readonly>
-                            <span class="input-info error">昵称</span>
-                        </a-input>
-                        <a-input title="邮箱">
-                            <input type="text" v-model="form.email" placeholder="邮箱" class="base-input" name="email" readonly>
-                            <span class="input-info error">邮箱</span>
-                        </a-input>
-                    </div>
-                </div>
-            </div>-->
+
         </div>
 </template>
 
@@ -56,25 +36,15 @@ import { ssp } from '../utils'
 import cookies from 'js-cookie'
 
 
-const fetchInitialData = async (store, config = { page: 1}) => {
-    const {params: {id, key, by}, path} = store.state.route
-    const userid = cookies.get('userid')
-    if (!userid) {
-        store.dispatch('global/showMsg', '请先登录!')
-        store.commit('global/showLoginModal', true)
-        return
-    }
-    const base = { ...config, limit: 10, user:userid, id, key, by }
-    await store.dispatch('frontend/article/getSelfList', base)
-    if (config.page === 1) ssp(path)
-}
 export default {
     data() {
         return {
             form: {
                 username: '',
+                userid: '',
                 email: ''
-            }
+            },
+            isSelf: true,
         }
     },
     components: {
@@ -89,8 +59,23 @@ export default {
         })
     },
     methods: {
+        async fetchInitialData (store, config = { page: 1}) {
+            const {params: {id, key, by}, path} = store.state.route
+            const username = decodeURIComponent(cookies.get('username'))
+            if (!username) {
+                store.dispatch('global/showMsg', '请先登录!')
+                store.commit('global/showLoginModal', true)
+                return
+            }
+
+            this.isSelf = username === id || id === 'self'
+            const base = { ...config, limit: 10, user: this.isSelf ? username : id, id, key, by }
+            await store.dispatch('frontend/article/getSelfList', base)
+            if (config.page === 1) ssp(path)
+        },
+
         loadMore(page = this.topics.page + 1) {
-            fetchInitialData(this.$store, {page})
+            this.fetchInitialData(this.$store, {page})
         },
         async handleLogout() {
             await api.post('frontend/user/logout', {})
@@ -100,6 +85,7 @@ export default {
             const { data: { code, data} } = await api.get('frontend/user/account')
             if (code === 200) {
                 this.form.username = data.username
+                this.form.userid = data.userid
                 this.form.email = data.email
             }
         },
@@ -109,7 +95,14 @@ export default {
     },
     mounted() {
         this.getUser()
-        fetchInitialData(this.$store, {page: 1})
+        this.fetchInitialData(this.$store, {page: 1})
     }
 }
 </script>
+<style scoped>
+    .main{
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
