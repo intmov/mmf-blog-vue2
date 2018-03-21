@@ -39,7 +39,7 @@
                 </el-table-column>
                 <el-table-column prop="days" label="打卡" sortable>
                     <template slot-scope="scope">
-                        <div style="display: block;font-size:9pt;"> <span style="font-size:11pt;color:purple;">{{ scope.row.days }} 天</span> </div>
+                        <div style="display: block;font-size:9pt;"> <span style="font-size:11pt;color:purple;">{{ scope.row.days }}</span> 天</div>
                     </template>
                 </el-table-column>
                 <el-table-column label="读经" sortable sort-by="chapters">

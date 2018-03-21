@@ -1,14 +1,15 @@
 <template>
-    <div class="main wrap clearfix">
-        <div class="main-left">
-            <account></account>
-        </div>
-        <div class="main-right">
+    <div class="main">
             <div class="card card-answer">
                 <div class="answer-content">
                     <div class="article-content">
-                        <h3 class="about-title">您好，{{form.username}}</h3>
-                    </div>
+                        <h3 class="about-title">您好，{{form.username.substr(1,5)}}
+                            <div style="float: right">
+                                <el-button @click="changePassword"><i class="el-icon-edit-outline"></i> 密码</el-button>
+                                <el-button @click="handleLogout"><i class="el-icon-upload2"></i> 登出</el-button>
+                            </div>
+                        </h3>
+                        </div>
                 </div>
 
             </div>
@@ -42,7 +43,6 @@
                 </div>
             </div>-->
         </div>
-    </div>
 </template>
 
 <script lang="babel" type="text/babel">
@@ -92,12 +92,19 @@ export default {
         loadMore(page = this.topics.page + 1) {
             fetchInitialData(this.$store, {page})
         },
+        async handleLogout() {
+            await api.post('frontend/user/logout', {})
+            window.location.href = '/'
+        },
         async getUser() {
             const { data: { code, data} } = await api.get('frontend/user/account')
             if (code === 200) {
                 this.form.username = data.username
                 this.form.email = data.email
             }
+        },
+        changePassword(){
+            this.$router.push("/user/password")
         }
     },
     mounted() {

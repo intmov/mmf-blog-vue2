@@ -1,9 +1,5 @@
 <template>
-    <div class="main wrap clearfix">
-        <div class="main-left">
-            <account></account>
-        </div>
-        <div class="main-right">
+    <div class="main">
             <div class="home-feeds cards-wrap">
                 <div class="settings-main card">
                     <div class="settings-main-content">
@@ -22,7 +18,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 </template>
 
