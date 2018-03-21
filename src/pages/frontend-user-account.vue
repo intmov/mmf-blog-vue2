@@ -10,19 +10,22 @@
                         <h3 class="about-title">您好，{{form.username}}</h3>
                     </div>
                 </div>
-                <div class="home-feeds cards-wrap">
-                    <el-row style="margin-bottom: 5px;" type="flex" justify="center">
-                        <div class="sepline">
-                            <span>= = 最近打卡情况 = =</span>
-                        </div>
-                    </el-row>
-                    <topics-item-none v-if="!topics.path">加载中, 请稍等...</topics-item-none>
-                    <template v-else-if="topics.data.length > 0">
-                        <topics-item :actionVisible="true" v-for="item in topics.data" :item="item" :key="item._id"></topics-item>
-                        <div class="load-more-wrap"><a v-if="topics.hasNext" @click="loadMore()" href="javascript:;" class="load-more">更多<i class="icon icon-circle-loading"></i></a></div>
-                    </template>
-                    <topics-item-none v-else>当前没有打卡记录...</topics-item-none>
-                </div>
+
+            </div>
+            <div class="home-feeds cards-wrap">
+<!--
+                <el-row style="margin-bottom: 5px;" type="flex" justify="center">
+                    <div class="sepline">
+                        <span>= = 最近打卡情况 = =</span>
+                    </div>
+                </el-row>
+-->
+                <topics-item-none v-if="!topics.path">加载中, 请稍等...</topics-item-none>
+                <template v-else-if="topics.data.length > 0">
+                    <topics-item :actionVisible="true" :selfView="true" v-for="item in topics.data" :item="item" :key="item._id"></topics-item>
+                    <div class="load-more-wrap"><a v-if="topics.hasNext" @click="loadMore()" href="javascript:;" class="load-more">更多<i class="icon icon-circle-loading"></i></a></div>
+                </template>
+                <topics-item-none v-else>当前没有打卡记录...</topics-item-none>
             </div>
             <!--<div class="home-feeds cards-wrap">
                 <div class="settings-main card">

@@ -1,6 +1,14 @@
 <template>
     <div class="card feed">
-        <div class="feed-article-content" style="margin-left: 4px;margin-right: 4px;"> <span class="feed-time">{{ item.update_date.slice(0,-3) }}</span><span class="feed-source">来自 <span v-text="item.username" class="feed-minor-link"></span></span>
+        <div class="feed-article-content" style="margin-left: 4px;margin-right: 4px;">
+            <template v-if="selfView">
+                <span class="feed-time">{{ item.update_date.slice(0,-3) }}</span>
+                <span class="feed-source"><span v-text="item.creat_date" class="feed-minor-link"></span></span>
+            </template>
+            <template v-else>
+                <span class="feed-time">{{ item.update_date.slice(0,-3) }}</span>
+                <span class="feed-source">来自 <span v-text="item.username" class="feed-minor-link"></span></span>
+            </template>
             <!-- <div class="feed-main-link-wrap"><router-link :to="'/article/' + item._id" v-text="item.title" class="feed-main-link"></router-link></div> -->
             <ul>
                 <li v-for="item in this.items" :item="item" :key="item._id">
@@ -28,7 +36,7 @@ export default {
     serverCacheKey: props => {
         return `frontend::topics::item::${props.item._id}`
     },
-    props: ['item','actionVisible'],
+    props: ['item','actionVisible', 'selfView'],
     data () {
         return {
             showMore: false

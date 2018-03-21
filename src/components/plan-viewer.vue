@@ -58,7 +58,7 @@ export default {
     .pl_content {
         padding-left: 0;
         padding-right: 0;
-        width: 99%;
+        width: 99.5%;
         clear: both;
         display: block;
         overflow: hidden;
