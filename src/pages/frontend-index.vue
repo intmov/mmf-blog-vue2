@@ -70,8 +70,6 @@ const fetchInitialData = async (store, config = { page: 1}) => {
         return
     }
     const base = { ...config, limit: 10, date: now, id, key, by }
-    // store.dispatch('global/category/getCategoryList')
-    // store.dispatch('frontend/article/getTrending')
     await store.dispatch('frontend/article/getArticleList', base)
     if (config.page === 1) ssp(path)
 }
@@ -88,7 +86,6 @@ export default {
             category: 'global/category/getCategoryList',
             trending: 'frontend/article/getTrending',
             monthList: 'frontend/article/getMonthList'
-            // selfList: 'frontend/article/getSelfList',
         }),
         needSign () {
             let ret = this.monthList.length <=0

@@ -14,7 +14,12 @@ const state = {
     },
     trending: [],
     monthList: [],
-    selfList:[],
+    selfList:{
+        data: [],
+        hasNext: 0,
+        page: 1,
+        path: ''
+    }
 }
 
 const actions = {
@@ -71,7 +76,7 @@ const actions = {
     },
     async ['getSelfList']({ commit, state, rootState: { global, route: { fullPath } } }, config) {
         const path = fullPath
-        console.log('Selflist', config)
+        if(!config) return
         const { data: { data, code } } = await api.get('frontend/article/list', { ...config, cache: false })
         console.log(data)
         if (data && code === 200) {
@@ -119,8 +124,14 @@ const mutations = {
         state.monthList = retlist
     },
     ['receiveSelfList'](state, { list, hasNext, hasPrev, page, path }) {
-        const retlist = []
-        state.selfList = list
+        if (page === 1) {
+            list = [].concat(list)
+        } else {
+            list = state.selfList.data.concat(list)
+        }
+        state.selfList = {
+            data: list, hasNext, hasPrev, page, path
+        }
     },
     ['modifyLikeStatus'](state, {id, status}) {
         if (state.item.data._id === id) {
