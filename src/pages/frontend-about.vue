@@ -49,6 +49,10 @@
                     '民,22-25',
                     '民,26-31',
                     '民,32-36',
+                    '民,32-36',
+                    '民,32-36',
+                    '民,32-36',
+                    '民,32-36',
                 ],
                 nt_items: [
                     '太,1-4',
@@ -114,7 +118,7 @@
         background-color: white;
     }
     .wh_container {
-        max-width: 660px;
+        max-width: 588px;
         margin: 5px 5px 5px 5px;
     }
 
