@@ -4,7 +4,7 @@
             <div v-for="(item, index) in plan" class="wh_content_item">
                 <div class="cell">
                     <div class="day">{{ index+1 }}</div>
-                    <div v-bind:style="{paddingTop: (60+vi*20)+'px' }" v-for="(verse,vi) in item.split(',')" class="verse">{{verse}}</div>
+                    <div v-bind:style="{paddingTop: (20+vi*20)+'px' }" v-for="(verse,vi) in item.split(',')" class="verse">{{verse}}</div>
                 </div>
             </div>
         </div></div>
@@ -18,11 +18,11 @@ export default {
 
 <style scoped>
     .day {
-        font-size: 18px;
+        font-size: 10px;
         color: purple;
-        padding-top: 20px;
+        padding-top: 8px;
         display: inline-block;
-        padding-left: 5px;
+        padding-left: 25px;
         justify-content: right;
     }
     .verse{
@@ -58,7 +58,7 @@ export default {
 
     .wh_content_item {
         font-size: 17px;
-        height: 103px;
+        height: 80px;
         line-height: 10%;
     }
 
