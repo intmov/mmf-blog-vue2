@@ -37,7 +37,7 @@
                         <div v-else style="color: #aaa; font-size:9pt;">{{ scope.row.update_date.substr(0,10)}}</div>
                     </template>
                 </el-table-column>
-                <el-table-column prop="days" label="打卡" sortable>
+                <el-table-column prop="days" label="打卡" sortable sort-by="days">
                     <template slot-scope="scope">
                         <div style="display: block;font-size:9pt;"> <span style="font-size:11pt;color:purple;">{{ scope.row.days }}</span> 天</div>
                     </template>
@@ -48,9 +48,10 @@
                         <div v-if="scope.row.meditation > 0" style="font-size:9pt;">默想 <span style="font-size:10pt;color:purple;">{{ scope.row.meditation }}</span> 次</div>
                     </template>
                 </el-table-column>
-                <el-table-column label="用时" sortable>
+                <el-table-column label="用时" sortable sort-by="readtime">
                     <template slot-scope="scope">
                         <div style="display: block;font-size:9pt;"> <span style="font-size:11pt;color:purple;">{{ scope.row.readtime }}</span> 分钟</div>
+                        <div style="display: block;font-size:9pt;">质量 <span style="font-size:11pt;color:purple;">{{ scope.row.quality.toFixed(1) }}</span></div>
                     </template>
                 </el-table-column>
             </el-table>
@@ -74,12 +75,13 @@
                 endDate:'',
                 summaryData: [{
                     rank: '1',
-                    user: '王小虎',
+                    user: 'Test',
                     userid: '1',
                     chapters: 20,
                     meditation: 20,
                     days: 150,
                     readtime: '20:13',
+                    quality: 3.5,
                     update_date: '00:11:11'
                 }]
             }

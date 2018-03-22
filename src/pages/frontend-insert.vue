@@ -8,6 +8,14 @@
                     <el-time-picker type="fixed-time"  value-format="HH:mm"  format="HH小时-mm分钟"  placeholder="选择时间" v-model="form.readtime" style="width: 100%;"></el-time-picker>
                 </el-col>
              </el-form-item>
+             <el-form-item label="读经质量" label-width="80px">
+                 <el-col :span="18">
+                     <el-rate style="margin-top: 10px;"
+                         v-model="form.quality" show-text :texts="quality_text"
+                         :colors="['#99A9BF', '#F7BA2A', '#ff8500']">
+                     </el-rate>
+                 </el-col>
+             </el-form-item>
             <el-form-item class="setSign">
                 <el-row :span="24" v-for="(item,fidx) of form.items">
                     <el-col :span="6" class="title">
@@ -65,7 +73,7 @@
                 </el-row>
             </el-form-item>
 
-            <el-input :span="20" type="textarea" :rows="6" placeholder="请输入收获或感想：" v-model="form.content"></el-input>
+            <el-input :span="20" type="textarea" :rows="5" placeholder="请输入收获或感想：" v-model="form.content"></el-input>
 
          </el-form>
 
@@ -102,6 +110,7 @@ export default {
     name: 'frontend-insert',
     data() {
         return {
+            quality_text: ['极差', '不好', '一般', '满意', '极好'],
             dialogPreviewVisible: false,
             bookOptions: bookOptions(),
             options:[{
@@ -110,6 +119,7 @@ export default {
             }],
             form: {
                 title: '',
+                quality: null,
                 category: '',
                 content: '',
                 readtime: '00:30',
@@ -163,7 +173,7 @@ export default {
             return total
         },
         insertPreview(){
-            if (!this.form.readtime || !this.form.items || !this.form.items[0].verseStart || !this.form.items[0].verseEnd) {
+            if (!this.form.readtime || !this.form.quality || !this.form.items || !this.form.items[0].verseStart || !this.form.items[0].verseEnd) {
                 this.$store.dispatch('global/showMsg', '必须填写投入时间和读经内容')
                 return false
             }
@@ -300,7 +310,7 @@ export default {
 
 <style scoped>
 
-.setSign .el-row{line-height: 40px;margin-bottom: 5px;}
+.setSign .el-row{line-height: 30px;margin-bottom: 5px;}
 .btn-insert-action{ width: 50%;}
 li{
     text-indent: 0;

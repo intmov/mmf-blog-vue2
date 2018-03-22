@@ -16,6 +16,7 @@ const state = {
     monthList: [],
     selfList:{
         data: [],
+        total:0,
         hasNext: 0,
         page: 1,
         path: ''
@@ -123,14 +124,14 @@ const mutations = {
         // console.log(retlist)
         state.monthList = retlist
     },
-    ['receiveSelfList'](state, { list, hasNext, hasPrev, page, path }) {
+    ['receiveSelfList'](state, { list, total, hasNext, hasPrev, page, path }) {
         if (page === 1) {
             list = [].concat(list)
         } else {
             list = state.selfList.data.concat(list)
         }
         state.selfList = {
-            data: list, hasNext, hasPrev, page, path
+            data: list, total, hasNext, hasPrev, page, path
         }
     },
     ['modifyLikeStatus'](state, {id, status}) {
