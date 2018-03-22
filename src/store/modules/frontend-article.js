@@ -32,7 +32,7 @@ const actions = {
         // console.log(config)
         if(!config) return
         const { data: { data, code} } = await api.get('frontend/article/list', {...config, cache: true})
-        console.log(data)
+        // console.log(data)
         if (data && code === 200) {
             commit('receiveArticleList', {
                 ...config,
@@ -65,7 +65,7 @@ const actions = {
         const path = fullPath
         console.log('monthlist',config)
         const { data: { data, code } } = await api.get('frontend/article/list', { ...config, cache: false })
-        console.log(data)
+        // console.log(data)
         if (data && code === 200) {
             commit('receiveMonthList', {
                 ...config,
@@ -78,7 +78,7 @@ const actions = {
         const path = fullPath
         if(!config) return
         const { data: { data, code } } = await api.get('frontend/article/list', { ...config, cache: false })
-        console.log(data)
+        // console.log(data)
         if (data && code === 200) {
             commit('receiveSelfList', {
                 ...config,
