@@ -33,25 +33,25 @@
                 <el-table-column label="用戶" width="85" sortable sort-by="update_date">
                     <template slot-scope="scope">
                         <a :href="'/user/account/'+ scope.row.user"><div style="display: block">{{ scope.row.user }}</div></a>
-                        <div v-if="rangeOption == 'day'" style="color: #aaa; font-size:9pt;">{{ scope.row.update_date.substr(11,9)}}</div>
-                        <div v-else style="color: #aaa; font-size:9pt;">{{ scope.row.update_date.substr(0,10)}}</div>
+                        <div v-if="rangeOption == 'day'" class="table_text gray_text">{{ scope.row.update_date.substr(11,9)}}</div>
+                        <div v-else class="table_text gray_text">{{ scope.row.update_date.substr(0,10)}}</div>
                     </template>
                 </el-table-column>
                 <el-table-column prop="days" label="打卡" sortable sort-by="days">
                     <template slot-scope="scope">
-                        <div style="display: block;font-size:9pt;"> <span style="font-size:11pt;color:purple;">{{ scope.row.days }}</span> 天</div>
+                        <div class="table_text"> <span class="number_text">{{ scope.row.days }}</span> 天</div>
                     </template>
                 </el-table-column>
                 <el-table-column label="读经" sortable sort-by="chapters">
                     <template slot-scope="scope">
-                        <div style="display: block;font-size:9pt;">共 <span style="font-size:11pt;color:purple;">{{ scope.row.chapters }}</span> 章</div>
-                        <div v-if="scope.row.meditation > 0" style="font-size:9pt;">默想 <span style="font-size:10pt;color:purple;">{{ scope.row.meditation }}</span> 次</div>
+                        <div class="table_text">共 <span class="number_text">{{ scope.row.chapters }}</span> 章</div>
+                        <div v-if="scope.row.meditation > 0" class="table_text gray_text">默想 <span style="font-size:10pt;color:purple;">{{ scope.row.meditation }}</span> 次</div>
                     </template>
                 </el-table-column>
                 <el-table-column label="用时" sortable sort-by="readtime">
                     <template slot-scope="scope">
-                        <div style="display: block;font-size:9pt;"> <span style="font-size:11pt;color:purple;">{{ scope.row.readtime }}</span> 分钟</div>
-                        <div style="display: block;font-size:9pt;">质量 <span style="font-size:11pt;color:purple;">{{ scope.row.quality.toFixed(1) }}</span></div>
+                        <div class="table_text"> <span class="number_text">{{ scope.row.readtime }}</span> 分钟</div>
+                        <div class="table_text gray_text">质量 <span class="number_text">{{ scope.row.quality }}</span></div>
                     </template>
                 </el-table-column>
             </el-table>
@@ -90,7 +90,10 @@
             async getSummaryData (config) {
                 const { data: { data, code} } = await api.get('frontend/article/summary', {...config, cache: false})
                 if(data != null){
-                    this.summaryData = data
+                    this.summaryData = data.map( d => {
+                        d.quality = d.quality ? d.quality.toFixed(1): 0
+                        return d
+                    })
                 }
             },
             changeRange(){
@@ -128,5 +131,18 @@
     }
     .radio{
         width: 70px;
+    }
+    .number_text{
+        font-size:11pt;
+        color:purple;
+    }
+
+    .table_text{
+        display: block;
+        font-size:9pt;
+    }
+
+    .gray_text{
+        color: #aaa;
     }
 </style>

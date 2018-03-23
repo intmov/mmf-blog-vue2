@@ -9,6 +9,7 @@ import index from '../pages/frontend-index.vue'
 import summary from '../pages/frontend-summary.vue'
 import article from '../pages/frontend-article.vue'
 import about from '../pages/frontend-about.vue'
+import svg from '../pages/frontend-svg.vue'
 import account from '../pages/frontend-user-account.vue'
 import password from '../pages/frontend-user-password.vue'
 import insert from '../pages/frontend-insert.vue'
@@ -51,6 +52,7 @@ const router = new VueRouter({
         { name:'summary', path: '/summary', component: summary, meta: { scrollToTop: true }, beforeEnter: guardRoute },
         { name:'article', path: '/article/:id', component: article, meta: { scrollToTop: true } },
         { name:'about', path: '/about', component: about, meta: { scrollToTop: true } },
+        { name:'aboutsvg', path: '/svg', component: svg, meta: { scrollToTop: true } },
         { name:'account', path: '/user/account/:id', component: account, meta: { scrollToTop: true }, beforeEnter: guardRoute },
         { name:'password', path: '/user/password', component: password, meta: { scrollToTop: true }, beforeEnter: guardRoute }
     ]
