@@ -1,5 +1,5 @@
 <template >
-    <div align="center">
+    <div align="center" class="main">
         <div id="drawing"></div>
     </div>
 </template>
@@ -21,7 +21,8 @@
                     verseEnd:[2,5],
                     startIdx: 0,
                     endIdx: 0
-                }]
+                }],
+                colors:['#35acd4', '#35acd4', '#35acd4', '#35acd4', '#35acd4', '#a0b4d9', '#a0b4d9', '#a0b4d9', '#a0b4d9', '#a0b4d9', '#a0b4d9', '#a0b4d9', '#a0b4d9', '#a0b4d9', '#a0b4d9', '#a0b4d9', '#a0b4d9', '#2a5051', '#2a5051', '#2a5051', '#2a5051', '#2a5051', '#653221', '#653221', '#653221', '#653221', '#653221', '#653221', '#653221', '#653221', '#653221', '#653221', '#653221', '#653221', '#653221', '#653221', '#653221', '#653221', '#653221', '#35acd4', '#35acd4', '#35acd4', '#35acd4', '#a0b4d9', '#2a5051', '#2a5051', '#2a5051', '#2a5051', '#2a5051', '#2a5051', '#2a5051', '#2a5051', '#2a5051', '#2a5051', '#2a5051', '#2a5051', '#2a5051', '#2a5051', '#2a5051', '#2a5051', '#2a5051', '#2a5051', '#2a5051', '#2a5051', '#2a5051', '#653221',]
             }
         },
         methods:{
@@ -55,25 +56,24 @@
                 this.drawSvg()
 
             },
+            getCoord(center, vlen, thea){
+                return [center.x+vlen*Math.sin(thea), center.y+vlen*Math.cos(thea)]
+            },
+            getCoordXY(center, vlen, thea){
+                return {x:center.x+vlen*Math.sin(thea), y:center.y+vlen*Math.cos(thea)}
+            },
             drawOneBook(book, center, stickTheta){
                 const verseList = book.verseList
-                const maxFlowers = 40
+                let maxFlowers = 40
+                if(verseList.length > 38) maxFlowers = verseList.length+1
                 const delta = 2*Math.PI/ maxFlowers
                 let thea = delta + stickTheta + Math.PI- verseList.length / maxFlowers * Math.PI
 
-                // this.svg.line(center.x, center.y, center.x+stickCenter.x, center.x+stickCenter.y).stroke({ width: 1, color: 'red' })
-
-                const colors = ['#35acd4','#a0b4d9','#2a5051','#653221']
-                // console.log(findBook)
-                // console.log(this.readList)
                 for(let chapter=0; chapter<verseList.length; chapter++){
                     const verse = verseList[chapter]
                     const vlen = verse
-                    let cc= colors[2]
-                    if(book.index < 44) cc= colors[0]
-                    else if(book.index === 44) cc= colors[1]
-                    else if(book.index === 66) cc= colors[3]
-                    // this.svg.text()
+                    const cc= this.colors[book.index-1]
+
                     let w = 0.3
                     const chapterIndex = book.chapterOffset + chapter +1
                     // console.log(chapterIndex)
@@ -81,7 +81,7 @@
                     if(findBook){
                         w = 1.5
                     }
-                    this.svg.line(center.x, center.y, center.x+vlen*Math.sin(thea), center.y+vlen*Math.cos(thea)).stroke({ width: w, color:cc })
+                    this.svg.line(center.x, center.y, ...this.getCoord(center, vlen, thea)).stroke({ width: w, color:cc })
                     thea += delta
                 }
             },
@@ -91,51 +91,81 @@
                 let thea = delta + stickArgs.theta + Math.PI- flowers / maxFlowers * Math.PI
                 for(let book=books[0]; book <= books[1]; book++){
                     const vlen = stickArgs.lengths[book-books[0]]
-                    const bookCenter = { x: center.x+vlen*Math.sin(thea), y: center.y+vlen*Math.cos(thea) }
-                    this.svg.line(center.x, center.y, bookCenter.x, bookCenter.y).stroke({ width: 1, color:'#aaa' })
+                    const bookCenter = this.getCoordXY(center, vlen, thea)
+                    this.svg.line(center.x, center.y, bookCenter.x,bookCenter.y).stroke({ width: 1, color:'#aaa' })
                     this.drawOneBook(testments2[book],bookCenter, thea+Math.PI)
+                    let textStartLen = 40
+                    if(vlen <= 45)  textStartLen = vlen/2
+                    const textStart = this.getCoordXY(center, textStartLen, thea)
+                    const textEnd = this.getCoordXY(center, textStartLen+10, thea)
+                    var text  = this.svg.text(testments2[book].simpleName).leading(0.5).fill('#aaa')
+                        .path(`M ${textStart.x} ${textStart.y}  L ${textEnd.x} ${textEnd.y}`)
+                        .font({size: 6,anchor: 'start'})
+                    var rect = this.svg.rect(text.bbox().width, text.bbox().height).attr({x:text.bbox().x, y:text.bbox().y}).fill('white')
+                    rect.after(text)
+
                     thea += delta
                 }
             },
-            drawSecondBranch(center){
+            drawSecondBranchNew(center){
                 const maxFlowers = 5
                 const flowers = 6
                 const delta = 2*Math.PI/ maxFlowers
                 let thea = delta + 0 + Math.PI- flowers / maxFlowers * Math.PI
-                const lengths = [120,60,180,80]
+                const lengths = [120,40,180,60]
                 for(let book=0; book < 4; book++){
                     const vlen = lengths[book]
-                    const bookCenter = { x: center.x+vlen*Math.sin(thea), y: center.y+vlen*Math.cos(thea) }
+                    const bookCenter = this.getCoordXY(center, vlen, thea)
                     this.svg.line(center.x, center.y, bookCenter.x, bookCenter.y).stroke({ width: 2, color:'#aaa' })
                     if(book === 0){
                         this.drawOneBranch([39,42], bookCenter, {theta: thea+Math.PI, lengths:[80,20,85,40]}, 5)
                     }else if(book ===1){
-                        this.drawOneBranch([43,43], bookCenter, {theta: thea+Math.PI, lengths:[0]}, 2)
+                        this.drawOneBranch([43,43], bookCenter, {theta: thea+Math.PI, lengths:[20]}, 2)
                     }else if(book ===2){
                         const sticksLengths = [100,140,80,60,80,80,80,80,80,80,80,80,80,80,60,80,80,80,80,80,80]
                         this.drawOneBranch([44,64], bookCenter, {theta: thea+Math.PI, lengths:sticksLengths}, 24)
                     }else if(book ===3){
-                        this.drawOneBranch([65,65], bookCenter, {theta: thea+Math.PI, lengths:[0]}, 2)
+                        this.drawOneBranch([65,65], bookCenter, {theta: thea+Math.PI, lengths:[20]}, 2)
+                    }
+
+                    thea += delta
+                }
+            },
+            drawSecondBranchOld(center){
+                const maxFlowers = 5
+                const flowers = 6
+                const delta = 2*Math.PI/ maxFlowers
+                let thea = delta + Math.PI/2- flowers / maxFlowers * Math.PI
+                const lengths = [180,200,180,180]
+                for(let book=0; book < 4; book++){
+                    const vlen = lengths[book]
+                    const bookCenter = this.getCoordXY(center, vlen, thea)
+                    this.svg.line(center.x, center.y, bookCenter.x, bookCenter.y).stroke({ width: 2, color:'#aaa' })
+                    if(book === 0){
+                        this.drawOneBranch([0,4], bookCenter, {theta: thea+Math.PI, lengths:[97,80,60,110,60]}, 7)
+                    }else if(book ===1){
+                        const sticksLengths = [115,70,50,115,80,120,80,135,80,80,55,40]
+                        this.drawOneBranch([5,16], bookCenter, {theta: thea+Math.PI, lengths:sticksLengths}, 13)
+                    }else if(book ===2){
+                        const sticksLengths = [68,100,60,50,50]
+                        this.drawOneBranch([17,21], bookCenter, {theta: thea+Math.PI, lengths:sticksLengths}, 7)
+                    }else if(book ===3){
+                        const sticksLengths = [80,140,60,130,68,50,60,60,60,60,60,60,60,60,60,60,60,60,80]
+                        this.drawOneBranch([22,38], bookCenter, {theta: thea+Math.PI, lengths:sticksLengths}, 19)
                     }
 
                     thea += delta
                 }
             },
             drawSvg(){
-                this.svg = SVG('drawing').size(600,600)
+                this.svg = SVG('drawing').size(600,1200)
                 const center = {x: 150, y: 300}
-                this.drawSecondBranch(center)
-                this.svg.line(center.x, center.y, center.x-50, center.y+80).stroke({ width: 2, color:'#aaa'})
-                //180,50,240,100
-                // this.drawOneBranch([39,42], {x:500, y:100}, {theta: Math.PI/4, lengths:[80,20,85,40]}, 5)
-                //
-                // this.drawOneBook(testments2[43],{x: 500, y:200}, Math.PI/2)
-                // this.drawOneBook(testments2[65],{x: 200, y:200}, Math.PI/2)
-                //
-                // this.drawOneBook(testments2[39],{x: 200, y:200}, Math.PI/2)
-                // this.drawOneBook(testments2[40],{x: 100, y:300}, Math.PI/2)
-                // this.drawOneBook(testments2[41],{x: 400, y:400}, Math.PI/2)
-                // this.drawOneBook(testments2[42],{x: 400, y:400}, Math.PI/2)
+                const center_old = {x:280, y:750}
+                const center_cc = {x: 40, y:500}
+                this.drawSecondBranchNew(center)
+                this.drawSecondBranchOld(center_old)
+                this.svg.line(center.x, center.y, center_cc.x, center_cc.y).stroke({ width: 3, color:'#aaa'})
+                this.svg.line(center_old.x, center_old.y, center_cc.x, center_cc.y).stroke({ width: 3, color:'#aaa'})
 
             }
         },
@@ -148,7 +178,7 @@
 </script>
 <style scoped>
     .main{
-        max-width: 600px;
+        /*max-width: 600px;*/
         margin-left: auto;
         margin-right: auto;
         background-color: white;
