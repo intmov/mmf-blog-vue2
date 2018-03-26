@@ -971,7 +971,7 @@ export function getVerseIndex(bookName, chapter, verse) {
 
 export function getChapterIndex(bookName, chapter) {
     updateBookOffset()
-    console.log(bookName)
+    // console.log(bookName)
     const book = findBook(bookName)
     return book.chapterOffset + chapter
 }

@@ -31,7 +31,7 @@
     </div>
   </section>
 </template>
-<script lang="babel">
+<script lang="babel" type="text/babel">
 import moment from 'moment/moment.js'
 
 export default {

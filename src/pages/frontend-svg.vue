@@ -5,7 +5,7 @@
 </template>
 <script lang="babel" type="text/babel">
     import SVG from "svg.js"
-    import {testments2,updateBookOffset} from '../utils'
+    import {getChapterIndex, getVerseIndex, testments2, updateBookOffset} from '../utils'
     import cookies from 'js-cookie'
     import api from '~api'
 
@@ -18,11 +18,10 @@
                     bookStart: ['','使徒行传'],
                     bookEnd: ['','使徒行传'],
                     verseStart:[1,1],
-                    verseEnd:[2,5]},{
-                    bookStart: ['','使徒行传'],
-                    bookEnd: ['','使徒行传'],
-                    verseStart:[3,1],
-                    verseEnd:[4,5]}]
+                    verseEnd:[2,5],
+                    startIdx: 0,
+                    endIdx: 0
+                }]
             }
         },
         methods:{
@@ -41,11 +40,18 @@
                 if (code === 200) {
                     this.readList = []
                     for(const item of data.list){
-                        JSON.parse(item.items).map ( p => this.readList.push(p))
+
+                        JSON.parse(item.items).map ( p => {
+                            const si = getChapterIndex(p.bookStart, p.verseStart[0])
+                            const ei = getChapterIndex(p.bookEnd, p.verseEnd[0])
+                            this.readList.push({...p, startIdx:si, endIdx: ei})
+                        })
                     }
                 }else{
                     this.readList = []
                 }
+
+                // console.log(this.readList)
                 this.drawSvg()
 
             },
@@ -58,10 +64,9 @@
                 // this.svg.line(center.x, center.y, center.x+stickCenter.x, center.x+stickCenter.y).stroke({ width: 1, color: 'red' })
 
                 const colors = ['#35acd4','#a0b4d9','#2a5051','#653221']
-                const findBook = this.readList.find(p => p.bookStart === book.name || p.bookStart[1] === book.name)
                 // console.log(findBook)
                 // console.log(this.readList)
-                for(const chapter in verseList){
+                for(let chapter=0; chapter<verseList.length; chapter++){
                     const verse = verseList[chapter]
                     const vlen = verse
                     let cc= colors[2]
@@ -70,10 +75,11 @@
                     else if(book.index === 66) cc= colors[3]
                     // this.svg.text()
                     let w = 0.3
+                    const chapterIndex = book.chapterOffset + chapter +1
+                    // console.log(chapterIndex)
+                    const findBook = this.readList.find(p => chapterIndex >= p.startIdx && chapterIndex <= p.endIdx)
                     if(findBook){
-                        if(chapter >= findBook.verseStart[0]  && chapter <= findBook.verseEnd[0]){
-                            w = 2
-                        }
+                        w = 1.5
                     }
                     this.svg.line(center.x, center.y, center.x+vlen*Math.sin(thea), center.y+vlen*Math.cos(thea)).stroke({ width: w, color:cc })
                     thea += delta

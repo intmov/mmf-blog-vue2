@@ -1,6 +1,7 @@
 <template>
 
     <div class="settings-main card">
+        <book-selector :visible="selectDialogVisible"></book-selector>
          <el-form ref="form" :model="form"  @submit.prevent="onSubmit" >
             <div class='article-title'>为<span style="color: purple;"> {{form.date}} </span>打卡：</div>
              <el-form-item label="投入时间" label-width="80px" class="setSign">
@@ -29,6 +30,8 @@
                         </el-select>
                     </el-col>
                     <el-col :span="7">
+                        <!--<el-button @click="selectDialogVisible = true">开始书卷</el-button>-->
+
                         <el-cascader
                            :options="bookOptions"
                             :show-all-levels="false"
@@ -99,9 +102,10 @@
 import api from '~api'
 import { mapGetters } from 'vuex'
 import aInput from '../components/_input.vue'
-import {bookOptions, getChapterIndex, testments} from '../utils'
+import {bookOptions, getChapterIndex, testments, testments2} from '../utils'
 import topicsItem from '../components/topics-item.vue'
 import cookies from 'js-cookie'
+import BookSelector from "../components/book-selector"
 
 const fetchInitialData = async (store, config = { limit: 99}) => {
     await store.dispatch('global/category/getCategoryList', config)
@@ -110,6 +114,11 @@ export default {
     name: 'frontend-insert',
     data() {
         return {
+            selectDialogTitle: '选择书卷',
+            selectDialogOptions: [],
+            selectDialogFlag:'book',
+            selectDialogColumns: 6,
+            selectDialogVisible: false,
             quality_text: ['极差', '不好', '一般', '满意', '极好'],
             dialogPreviewVisible: false,
             bookOptions: bookOptions(),
@@ -142,6 +151,7 @@ export default {
         }
     },
     components: {
+        BookSelector,
         aInput, topicsItem
     },
     computed: {
@@ -174,7 +184,7 @@ export default {
         },
         insertPreview(){
             if (!this.form.readtime || !this.form.quality || !this.form.items || !this.form.items[0].verseStart || !this.form.items[0].verseEnd) {
-                this.$store.dispatch('global/showMsg', '必须填写投入时间和读经内容')
+                this.$store.dispatch('global/showMsg', '必须填写投入时间+读经质量+读经内容')
                 return false
             }
             this.form.items2 = []
@@ -278,9 +288,17 @@ export default {
         },
         changeSelectedVerseStart(idx) {
             this.form.items[idx].verseEnd = this.form.items[idx].verseStart
+        },
+        onSelectDialogClick(link){
+            this.selectDialogVisible =false
+            console.log(link)
+        },
+        init(){
+            this.selectDialogOptions = testments2.map(p => {return p.simpleName})
         }
     },
     mounted() {
+        this.init()
         if(localStorage.lastActivity != null){
             const items = JSON.parse(localStorage.lastActivity)
             this.options.pop()
