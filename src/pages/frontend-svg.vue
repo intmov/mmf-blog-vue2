@@ -180,6 +180,6 @@
         /*max-width: 600px;*/
         margin-left: auto;
         margin-right: auto;
-        background-color: white;
+        background-color: #ebf0f0;
     }
 </style>
