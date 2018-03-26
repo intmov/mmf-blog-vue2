@@ -100,7 +100,7 @@
                     var text  = this.svg.text(testments2[book].simpleName).leading(0.5).fill('#aaa')
                         .path(`M ${textStart.x} ${textStart.y}  L ${textEnd.x} ${textEnd.y}`)
                         .font({size: 6,anchor: 'start'})
-                    var rect = this.svg.rect(text.bbox().width, text.bbox().height).attr({x:text.bbox().x, y:text.bbox().y}).fill('white')
+                    var rect = this.svg.rect(text.bbox().width, text.bbox().height).attr({x:text.bbox().x, y:text.bbox().y}).fill('#ebf0f0')
                     rect.after(text)
 
                     thea += delta
@@ -157,7 +157,7 @@
                 }
             },
             drawSvg(){
-                this.svg = SVG('drawing').size(600,1200)
+                this.svg = SVG('drawing').size(550,1100)
                 const center = {x: 150, y: 300}
                 const center_old = {x:280, y:750}
                 const center_cc = {x: 40, y:500}
