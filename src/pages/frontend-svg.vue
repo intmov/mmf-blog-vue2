@@ -5,7 +5,7 @@
 </template>
 <script lang="babel" type="text/babel">
     import SVG from "svg.js"
-    import {getChapterIndex, getVerseIndex, testments2, updateBookOffset} from '../utils'
+    import {getChapterIndex, testments2, updateBookOffset} from '../utils'
     import cookies from 'js-cookie'
     import api from '~api'
 
@@ -35,8 +35,7 @@
                     return
                 }
 
-                this.isSelf = username === id || id === 'self'
-                const base = { ...config, limit: 1000, user: username, id, key, by }
+                const base = { ...config, limit: 1000, user: id, id, key, by }
                 const { data: { data, code} } = await api.get('frontend/article/list', base)
                 if (code === 200) {
                     this.readList = []
