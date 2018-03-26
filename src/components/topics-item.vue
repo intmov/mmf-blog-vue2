@@ -8,7 +8,7 @@
             </template>
             <template v-else>
                 <span class="feed-time">{{ item.update_date.slice(0,-3) }}</span>
-                <span class="feed-source">来自 <span v-text="item.username" class="feed-minor-link"></span>
+                <span class="feed-source"> 来自 <span v-text="item.username" class="feed-minor-link"></span>
                 </span>
             </template>
             <el-rate style="display: inline; margin-left: 5px;margin-top: -3px;" v-model="item.quality"  disabled :colors="['#99A9BF', '#99A9BF', '#99A9BF']"></el-rate>

@@ -135,7 +135,7 @@
                 const flowers = 6
                 const delta = 2*Math.PI/ maxFlowers
                 let thea = delta + Math.PI/2- flowers / maxFlowers * Math.PI
-                const lengths = [180,200,180,180]
+                const lengths = [180,200,75,200]
                 for(let book=0; book < 4; book++){
                     const vlen = lengths[book]
                     const bookCenter = this.getCoordXY(center, vlen, thea)
@@ -146,7 +146,7 @@
                         const sticksLengths = [115,70,50,115,80,120,80,135,80,80,55,40]
                         this.drawOneBranch([5,16], bookCenter, {theta: thea+Math.PI, lengths:sticksLengths}, 13)
                     }else if(book ===2){
-                        const sticksLengths = [68,100,60,50,50]
+                        const sticksLengths = [68,100,60,30,30]
                         this.drawOneBranch([17,21], bookCenter, {theta: thea+Math.PI, lengths:sticksLengths}, 7)
                     }else if(book ===3){
                         const sticksLengths = [80,140,60,130,68,50,60,60,60,60,60,60,60,60,60,60,60,60,80]

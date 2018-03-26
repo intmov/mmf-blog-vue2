@@ -11,7 +11,7 @@
                         </h3>
                         <h3 class="about-title" v-else>欢迎来到 {{$route.params.id}} 的空间 </h3>
                         <div style="color: #aaa;" v-if="topics.data.length > 0">累计打卡 <span style="color: purple">{{topics.total}}</span> 次
-                            <a style="margin-left: 10px" :href="'/svg/'+$route.params.id">   统计图表</a>
+                            <a :href="'/svg/'+$route.params.id">统计</a>
                         </div>
 
                     </div>
