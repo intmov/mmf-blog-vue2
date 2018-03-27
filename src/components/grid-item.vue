@@ -13,7 +13,8 @@
         </div>
         <p v-if="hasLabelSlot || label" class="weui-grid__label">
             <slot name="label">
-                <span v-html="label"></span>
+                <span v-if="select" style="color: red" v-text="label"></span>
+                <span v-else style="color: black" v-text="label"></span>
             </slot>
         </p>
         <slot></slot>
@@ -24,7 +25,7 @@
 
     export default {
         name: 'grid-item',
-        props: ['icon', 'label', 'link'],
+        props: ['icon', 'label', 'link','select'],
         created () {
             this.$parent.countColumn()
         },

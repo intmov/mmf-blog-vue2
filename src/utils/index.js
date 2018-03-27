@@ -945,6 +945,9 @@ export const findBook = name => {
     return testments2.find(bk => bk.name === name)
 }
 
+export const findBookBySimpleName = name => {
+    return testments2.find(bk => bk.simpleName === name)
+}
 export const updateBookOffset = () => {
     let bookTotalLen = 0
     let totalChapterOffset = 0

@@ -1,7 +1,9 @@
 <template>
 
     <div class="settings-main card">
-        <book-selector :visible="selectDialogVisible"></book-selector>
+        <book-selector :visible="selectDialogVisible" :selectBook="selectBook" :selectChapter="selectChapter" :selectVerse="selectVerse"
+                       @on-select-change="bookSelectorChange"
+                       @on-visible-change="bookSelectorVisibleChange"></book-selector>
          <el-form ref="form" :model="form"  @submit.prevent="onSubmit" >
             <div class='article-title'>为<span style="color: purple;"> {{form.date}} </span>打卡：</div>
              <el-form-item label="投入时间" label-width="80px" class="setSign">
@@ -30,39 +32,10 @@
                         </el-select>
                     </el-col>
                     <el-col :span="7">
-                        <!--<el-button @click="selectDialogVisible = true">开始书卷</el-button>-->
-
-                        <el-cascader
-                           :options="bookOptions"
-                            :show-all-levels="false"
-                            v-model="item.bookStart"
-                            @change="changeSelectedBookStart(fidx)"
-                        ></el-cascader>
-                        <el-cascader
-                           :options="options[fidx].verseStartOptions"
-                            v-model="item.verseStart"
-                            @change="changeSelectedVerseStart(fidx)"
-                            placeholder="开始章节"
-                            change-on-select
-                            separator=":"
-                        ></el-cascader>
-                        <!-- <el-input v-model="item.verseStart"  placeholder="开始章节" size="large"></el-input> -->
+                        <el-button @click="clickStartBook(fidx)" style="margin-left:2px;width: 95%">{{item.displayStart}}</el-button>
                     </el-col>
                     <el-col :span="7">
-                           <el-cascader
-                           :options="bookOptions"
-                            :show-all-levels="false"
-                            v-model="item.bookEnd"
-                            @change="changeSelectedBookEnd(fidx)"
-                        ></el-cascader>
-                        <el-cascader
-                           :options="options[fidx].verseEndOptions"
-                            v-model="item.verseEnd"
-                            placeholder="结束章节"
-                            change-on-select
-                            separator=":"
-                        ></el-cascader>
-                        <!-- <el-input v-model="item.verseEnd"  placeholder="结束章节" size="large"></el-input> -->
+                        <el-button @click="clickEndBook(fidx)" style="width: 95%">{{item.displayEnd}}</el-button>
                     </el-col>
                     <el-col :span='3' type="flex" justify="center">
                         <el-button icon="el-icon-delete" @click.native.prevent="removeItem(item)" title="删除"></el-button>
@@ -114,10 +87,15 @@ export default {
     name: 'frontend-insert',
     data() {
         return {
-            selectDialogTitle: '选择书卷',
-            selectDialogOptions: [],
-            selectDialogFlag:'book',
-            selectDialogColumns: 6,
+            currentIndex: 0,
+            selectBook: '',
+            selectChapter: 1,
+            selectVerse: 1,
+            start: true,
+            // selectDialogTitle: '选择书卷',
+            // selectDialogOptions: [],
+            // selectDialogFlag:'book',
+            // selectDialogColumns: 6,
             selectDialogVisible: false,
             quality_text: ['极差', '不好', '一般', '满意', '极好'],
             dialogPreviewVisible: false,
@@ -138,8 +116,10 @@ export default {
                     bookEnd: [],
                     verseStart:[],
                     verseEnd:[],
-                    chapters: "1"},
-                ],
+                    chapters: "1",
+                    displayStart:'开始章节',
+                    displayEnd:'结束章节',
+                }],
                 items2:"",
                 readtime2:0,
                 userid: '',
@@ -254,7 +234,9 @@ export default {
                 bookEnd: [],
                 verseStart:[],
                 verseEnd:[],
-                chapters: "1"
+                chapters: "1",
+                displayStart: '开始章节',
+                displayEnd: '结束章节',
             })
             this.options.push({
                 verseStartOptions: [],
@@ -289,33 +271,65 @@ export default {
         changeSelectedVerseStart(idx) {
             this.form.items[idx].verseEnd = this.form.items[idx].verseStart
         },
-        onSelectDialogClick(link){
-            this.selectDialogVisible =false
-            console.log(link)
+        clickStartBook(fidx){
+            this.currentIndex = fidx
+            this.start = true
+            const item = this.form.items[fidx]
+            this.selectBook = item.bookStart[1] || '创'
+            this.selectChapter = item.verseStart[0] || 1
+            this.selectVerse = item.verseStart[1] || 1
+            this.selectDialogVisible =true
+
         },
-        init(){
-            this.selectDialogOptions = testments2.map(p => {return p.simpleName})
-        }
+        clickEndBook(fidx){
+            this.currentIndex = fidx
+            this.start = false
+            const item = this.form.items[fidx]
+            this.selectBook = item.bookEnd[1] || '创'
+            this.selectChapter = item.verseEnd[0] || 1
+            this.selectVerse = item.verseEnd[1] || 1
+            this.selectDialogVisible =true
+        },
+        bookSelectorVisibleChange(val){
+            this.selectDialogVisible = val
+        },
+        bookSelectorChange(val){
+            this.selectDialogVisible = false
+            if(this.start){
+                const item = this.form.items[this.currentIndex]
+                item.bookStart = val.book
+                item.verseStart = val.verse
+                item.displayStart = this.getDisplay(item, true)
+            }else{
+                const item = this.form.items[this.currentIndex]
+                item.bookEnd = val.book
+                item.verseEnd = val.verse
+                item.displayEnd = this.getDisplay(item, false)
+            }
+        },
+        getDisplay(item, start=true){
+            if(start)
+                return item.bookStart[1] + item.verseStart[0] +(item.verseStart[1]?":"+ item.verseStart[1]:'')
+
+            return item.bookEnd[1] + item.verseEnd[0] +(item.verseEnd[1]?":"+ item.verseEnd[1]:'')
+        },
     },
     mounted() {
-        this.init()
         if(localStorage.lastActivity != null){
             const items = JSON.parse(localStorage.lastActivity)
             this.options.pop()
             this.form.items.pop()
             for (const idx in items){
                 const item = items[idx]
-                this.options.push({
-                    verseStartOptions: this.formVerseOptions(item.bookEnd[1]),
-                    verseEndOptions: this.formVerseOptions(item.bookEnd[1])
-                })
                 this.form.items.push({
                     catalog: item.catalog,
                     bookStart: item.bookEnd,
                     bookEnd: item.bookEnd,
                     verseStart: item.verseEnd,
                     verseEnd: item.verseEnd,
-                    chapters: item.chapters,
+                    chapters: 1,
+                    displayStart: this.getDisplay(item, true),
+                    displayEnd: this.getDisplay(item, false)
                 })
             }
         }
