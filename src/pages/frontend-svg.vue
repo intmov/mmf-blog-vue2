@@ -30,12 +30,10 @@
                 const {params: {id, key, by}, path} = store.state.route
                 const username = decodeURIComponent(cookies.get('username'))
                 if (!username) {
-                    store.dispatch('global/showMsg', '请先登录!')
-                    store.commit('global/showLoginModal', true)
                     return
                 }
 
-                const base = { ...config, limit: 1000, user: id, id, key, by }
+                const base = { ...config, limit: 1000, user: id === 'self' ? username:id, id, key, by }
                 const { data: { data, code} } = await api.get('frontend/article/list', base)
                 if (code === 200) {
                     this.readList = []
