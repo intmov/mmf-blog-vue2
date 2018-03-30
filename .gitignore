@@ -1,6 +1,8 @@
 .DS_Store
 node_modules/
 dist/
+dist_old/
 npm-debug.log
 .vscode/
 admin.lock
+yarn-error.log

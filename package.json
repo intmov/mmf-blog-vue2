@@ -37,6 +37,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-runtime": "^6.26.0",
     "browserslist": "^2.9.1",
+    "compression-webpack-plugin": "^1.1.11",
     "connect-history-api-fallback": "^1.5.0",
     "css-loader": "^0.28.7",
     "eslint-config-lcy-vue": "^2.1.1",
