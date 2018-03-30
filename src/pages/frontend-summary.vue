@@ -26,7 +26,7 @@
 
         </div>
         <div class="summary">
-            <el-table stripe
+            <el-table stripe :row-class-name="tableRowClassName"
                 :data="summaryData" border style="background:transparent;">
                 <el-table-column label="#"  type="index"   width="40"> </el-table-column>
                 <!--<el-table-column prop="rank"        label="#"    width="40"> </el-table-column>-->
@@ -40,12 +40,13 @@
                 <el-table-column prop="days" label="打卡" sortable sort-by="days">
                     <template slot-scope="scope">
                         <div class="table_text"> <span class="number_text">{{ scope.row.days }}</span> 天</div>
+                        <div v-if="scope.row.late_days > 0" class="table_text gray_text">补打 <span class="number_text">{{ scope.row.late_days }}</span> 天</div>
                     </template>
                 </el-table-column>
                 <el-table-column label="读经" sortable sort-by="chapters">
                     <template slot-scope="scope">
                         <div class="table_text">共 <span class="number_text">{{ scope.row.chapters }}</span> 章</div>
-                        <div v-if="scope.row.meditation > 0" class="table_text gray_text">默想 <span style="font-size:10pt;color:purple;">{{ scope.row.meditation }}</span> 次</div>
+                        <div v-if="scope.row.meditation > 0" class="table_text gray_text">默想 <span class="number_text">{{ scope.row.meditation }}</span> 次</div>
                     </template>
                 </el-table-column>
                 <el-table-column label="用时" sortable sort-by="readtime">
@@ -80,6 +81,7 @@
                     chapters: 20,
                     meditation: 20,
                     days: 150,
+                    late_days: 2,
                     readtime: '20:13',
                     quality: 3.5,
                     update_date: '00:11:11'
@@ -87,6 +89,12 @@
             }
         },
         methods: {
+            tableRowClassName({row, rowIndex}) {
+                if (row.days === 0) {
+                    return 'warning-row'
+                }
+                return ''
+            },
             async getSummaryData (config) {
                 const { data: { data, code} } = await api.get('frontend/article/summary', {...config, cache: false})
                 if(data != null){
@@ -144,5 +152,9 @@
 
     .gray_text{
         color: #aaa;
+    }
+
+    .el-table .warning-row {
+        background: oldlace;
     }
 </style>

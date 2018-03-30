@@ -64,7 +64,7 @@ export default {
     },
     methods: {
         async fetchInitialData (store, config = { page: 1}) {
-            const {params: {id, key, by}, path} = store.state.route
+            const {params: {id, key, by1}, path} = store.state.route
             const username = decodeURIComponent(cookies.get('username'))
             if (!username) {
                 store.dispatch('global/showMsg', '请先登录!')
@@ -73,7 +73,7 @@ export default {
             }
 
             this.isSelf = username === id || id === 'self'
-            const base = { ...config, limit: 10, user: this.isSelf ? username : id, id, key, by }
+            const base = { ...config, limit: 10, user: this.isSelf ? username : id, id, key, by:'creat_date' }
             await store.dispatch('frontend/article/getSelfList', base)
             if (config.page === 1) ssp(path)
         },

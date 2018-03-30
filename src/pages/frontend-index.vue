@@ -11,21 +11,28 @@
         <div v-else-if="needSign" class="sep">
             <el-row type="flex" justify="center">
                 <el-button>
-                    <router-link to="/insert" active-class="active" class="side-entry"><i class="icon icon-arrow-right"></i><i class="el-icon-circle-plus-outline"></i>去打卡</router-link>                <!-- <a href="/frontend/articles/insert" class="nav-link"><span class="text">请打卡</span></a> -->
+                    <router-link to="/insert" active-class="active" class="side-entry">
+                        <i class="icon icon-arrow-right"></i>
+                        <i class="el-icon-circle-plus-outline"></i>去打卡
+                    </router-link>
+                    <!-- <a href="/frontend/articles/insert" class="nav-link"><span class="text">请打卡</span></a> -->
                 </el-button>
             </el-row>
         </div>
         <div v-else-if="canotSign" class="sep"><el-row type="flex" justify="center"><span>这天无法打卡</span></el-row></div>
-            <div v-else class="sep" style="background: white;">
-                <el-row style="margin-bottom: 5px;" type="flex" justify="center"><span style="margin-top: 5px; margin-right: 40px;">今日已打卡</span> <el-button @click="deletePost" style="margin-top: 2px;"><i class="el-icon-delete"></i>删除</el-button></el-row>
-                <div class="sepline" />
-                <div>
-                    <topics-item-none v-if="!topics.path">加载中, 请稍等...</topics-item-none>
-                    <template v-else-if="topics.data.length > 0">
-                        <topics-item :actionVisible="true" v-for="item in topics.data" v-if="item.username === user" :item="item" :key="item._id"></topics-item>
-                    </template>
-                </div>
+        <div v-else class="sep" style="background: white;">
+            <el-row style="margin-bottom: 5px;" type="flex" justify="center">
+                <span style="margin-top: 5px; margin-right: 40px;">今日已打卡</span>
+                <el-button @click="deletePost" style="margin-top: 2px;"><i class="el-icon-delete"></i>删除</el-button>
+            </el-row>
+            <div class="sepline" />
+            <div>
+                <topics-item-none v-if="!topics.path">加载中, 请稍等...</topics-item-none>
+                <template v-else-if="topics.data.length > 0">
+                    <topics-item :actionVisible="true" v-for="item in topics.data" v-if="item.username === user" :item="item" :key="item._id"></topics-item>
+                </template>
             </div>
+        </div>
         <div>
             <div class="home-feeds cards-wrap">
                 <el-row style="margin-bottom: 5px;" type="flex" justify="center">
