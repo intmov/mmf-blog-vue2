@@ -37,7 +37,7 @@
             <div class="home-feeds cards-wrap">
                 <el-row style="margin-bottom: 5px;" type="flex" justify="center">
                     <div class="sepline">
-                        <span>= = 所有成员打卡详情 = =</span>
+                        <span> = = 所有成员打卡详情 (<span style="color:purple;">{{topics.data.length}}</span>) = =</span>
                     </div>
                 </el-row>
                 <topics-item-none v-if="!topics.path">加载中, 请稍等...</topics-item-none>
