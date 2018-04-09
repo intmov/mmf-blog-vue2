@@ -9,7 +9,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 config.build.productionSourceMap = false
 
-module.exports = merge(baseWebpackConfig, {
+var webpackConfig = merge(baseWebpackConfig, {
     module: {
         rules: [{
             test: /\.css$/,
@@ -95,3 +95,23 @@ module.exports = merge(baseWebpackConfig, {
         }),
     ]
 })
+
+if (config.build.productionGzip) {
+    var CompressionWebpackPlugin = require('compression-webpack-plugin')
+
+    webpackConfig.plugins.push(
+        new CompressionWebpackPlugin({
+            asset: '[path].gz[query]',
+            algorithm: 'gzip',
+            test: new RegExp(
+                '\\.(' +
+                config.build.productionGzipExtensions.join('|') +
+                ')$'
+            ),
+            threshold: 5120,
+            minRatio: 0.8
+        })
+    )
+}
+
+module.exports = webpackConfig
