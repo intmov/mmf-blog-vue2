@@ -135,7 +135,7 @@ export const bookOptions= () => {
             value: '启示录',
             label: '启示录',
             children: [
-                {label:'启示录'}
+                {value: '启示录', label:'启示录'}
             ]
         }
     ]
