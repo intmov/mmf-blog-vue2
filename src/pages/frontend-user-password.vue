@@ -14,14 +14,14 @@
                         </a-input>
                     </div>
                     <div class="settings-footer clearfix">
-                        <a @click="modify" href="javascript:;" class="btn btn-yellow">保存设置</a>
+                        <a @click="modify" href="javascript:;" class="btn btn-yellow">修改密码</a>
                     </div>
                 </div>
             </div>
     </div>
 </template>
 
-<script lang="babel">
+<script>
 import api from '~api'
 import metaMixin from '~mixins'
 import account from '~components/aside-account.vue'

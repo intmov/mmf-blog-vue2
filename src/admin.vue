@@ -13,11 +13,15 @@
     </div>
 </div>
 </template>
-<script lang="babel">
+<script>
+
+import Vue from 'vue'
 import { mapGetters } from 'vuex'
 import NProgress from 'nprogress'
 import Navigation from './components/navigation.vue'
 import backendMenu from './components/backend-menu.vue'
+import Element from 'element-ui'
+Vue.use(Element)
 
 export default {
     computed: {

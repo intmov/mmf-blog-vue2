@@ -37,7 +37,13 @@
             <div class="home-feeds cards-wrap">
                 <el-row style="margin-bottom: 5px;" type="flex" justify="center">
                     <div class="sepline">
-                        <span> = = 所有成员打卡详情 (<span style="color:purple;">{{topics.data.length}}</span>) = =</span>
+                        <span> = = <el-select   v-if="group.userGroups && group.userGroups.length > 1"  size="mini" style="width: 80px;" v-model="group.currentUserGroup" placeholder="请选择分组">
+                    <el-option
+                        v-for="item in group.userGroups"
+                        :key="item"
+                        :value="item">
+                    </el-option>
+                </el-select> 打卡详情 (<span style="color:purple;">{{topics.data.length}}</span>) = =</span>
                     </div>
                 </el-row>
                 <topics-item-none v-if="!topics.path">加载中, 请稍等...</topics-item-none>
@@ -53,6 +59,7 @@
 <script lang="babel" type="text/babel">
 import ls from 'store2'
 import api from '~api'
+import Vue from 'vue'
 import { mapGetters } from 'vuex'
 import topicsItem from '../components/topics-item.vue'
 import topicsItemNone from '../components/topics-item-none.vue'
@@ -82,7 +89,7 @@ const fetchInitialData = async (store, config = { page: 1}) => {
 }
 export default {
     name: 'frontend-index',
-    prefetch: fetchInitialData,
+    // prefetch: fetchInitialData,
     mixins: [metaMixin],
     components: {
         topicsItem, topicsItemNone, category, trending, calendar
@@ -110,12 +117,17 @@ export default {
     data() {
         return {
             // needSign:  return true,
-            user: ''
+            user: '',
+            userData: {},
+            group:{
+                userGroups:[],
+                currentUserGroup:'',
+            }
         }
     },
     methods: {
         loadMore(page = this.topics.page + 1) {
-            fetchInitialData(this.$store, {page})
+            fetchInitialData(this.$store, {page,user_groups:this.group.currentUserGroup})
         },
         clickTodayMonth(data){
             localStorage.selectDate = data
@@ -126,7 +138,7 @@ export default {
             localStorage.selectDate = data
             // this.$store.commit('global/selectDate', data)
             now = data
-            fetchInitialData(this.$store, {page: 1})
+            fetchInitialData(this.$store, {page: 1,user_groups:this.group.currentUserGroup})
             // console.log('click day!'+data+this.needSign)
             this.changeMonth(now)
         },
@@ -145,19 +157,42 @@ export default {
                     content: message
                 })
             }
-            fetchInitialData(this.$store,{page:1})
-        }
+            fetchInitialData(this.$store,{page:1,user_groups:this.group.currentUserGroup})
+        },
+        async getData() {
+            const username = cookies.get('username')
+            if (!username) {
+                this.$store.dispatch('global/showMsg', '请先登录!')
+                this.$store.commit('global/showLoginModal', true)
+                return
+            }
+            const { data: { code, data} } = await api.get('frontend/user/account')
+            if (code === 200) {
+                this.userData = data
+                this.user = decodeURIComponent(cookies.get('username'))
+                try {
+                    this.group.userGroups.splice(0,this.group.userGroups.length)
+                    for(const k in data.user_groups.split(';')){
+                        this.group.userGroups.push(data.user_groups.split(';')[k])
+                    }
+                    this.group.currentUserGroup = this.group.userGroups[0]
+                }catch(e){
+                    console.error(e)
+                }
+                fetchInitialData(this.$store, {page: 1,user_groups:this.group.currentUserGroup})
+                this.changeMonth(now)
+            }
+        },
     },
     mounted() {
-        this.user = decodeURIComponent(cookies.get('username'))
-        fetchInitialData(this.$store, {page: 1})
-        this.changeMonth(now)
+        this.getData()
+
     },
-    watch: {
-        '$route'() {
-            fetchInitialData(this.$store, {page: 1})
-        }
-    },
+    // watch: {
+    //     '$route'() {
+    //         fetchInitialData(this.$store, {page: 1,user_groups:this.group.currentUserGroup})
+    //     }
+    // },
     beforeRouteLeave(to, from, next) {
         const scrollTop = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop)
         const path = from.path

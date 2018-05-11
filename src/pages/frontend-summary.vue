@@ -1,7 +1,8 @@
 <template >
     <div class="main" align="center">
         <div>
-            <el-radio-group v-model="rangeOption" @change="changeRange">
+
+            <el-radio-group v-model="rangeOption" @change="changeRange" style="padding-top: 10px">
                 <el-radio class="radio" label="day"   border>当天</el-radio>
                 <el-radio class="radio" label="week"  border>本周</el-radio>
                 <el-radio class="radio" label="month" border>本月</el-radio>
@@ -22,6 +23,14 @@
                     </el-row>
                 </el-form-item>
             </el-form>
+
+            <el-select v-if="group.userGroups && group.userGroups.length > 1" style="width: 100%;margin-top: 5px" v-model="group.currentUserGroup" @change="changeRange" placeholder="请选择分组">
+                <el-option
+                    v-for="item in group.userGroups"
+                    :key="item"
+                    :value="item">
+                </el-option>
+            </el-select>
 
 
         </div>
@@ -74,6 +83,11 @@
                 rangeOption: 'day',
                 startDate: '',
                 endDate:'',
+                group:{
+                    userGroups:[],
+                    currentUserGroup:'',
+                },
+                userData: {},
                 summaryData: [{
                     rank: '1',
                     user: 'Test',
@@ -95,8 +109,26 @@
                 }
                 return ''
             },
+            async getData(){
+                const { data: { code, data} } = await api.get('frontend/user/account')
+                if (code === 200) {
+                    this.userData = data
+                    try {
+                        this.group.userGroups.splice(0,this.group.userGroups.length)
+                        for(const k in data.user_groups.split(';')){
+                            this.group.userGroups.push(data.user_groups.split(';')[k])
+                        }
+                        this.group.currentUserGroup = this.group.userGroups[0]
+
+                        this.getSummaryData({type:'day'})
+                    }catch(e){
+                        console.error(e)
+                    }
+                }
+            },
             async getSummaryData (config) {
-                const { data: { data, code} } = await api.get('frontend/article/summary', {...config, cache: false})
+                console.log(this.group.currentUserGroup)
+                const { data: { data, code} } = await api.get('frontend/article/summary', {...config, user_groups:this.group.currentUserGroup, cache: false})
                 if(data != null){
                     this.summaryData = data.map( d => {
                         d.quality = d.quality ? d.quality.toFixed(1): 0
@@ -114,7 +146,9 @@
 
         },
         mounted() {
-            this.getSummaryData({type:'day'})
+            this.getData()
+
+
         }
     }
 </script>
@@ -123,6 +157,7 @@
         max-width: 600px;
         margin-left: auto;
         margin-right: auto;
+        background: white;
     }
     .summary{
         margin-top: 10px;

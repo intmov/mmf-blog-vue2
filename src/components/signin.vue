@@ -20,7 +20,7 @@
     </div>
 </template>
 
-<script lang="babel">
+<script>
 import api from '~api'
 export default {
     props: ['show'],

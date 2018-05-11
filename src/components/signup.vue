@@ -20,6 +20,15 @@
                         <input v-model="form.re_password" type="password" placeholder="重复密码" class="base-input">
                         <p class="error-info input-info hidden">长度至少 6 位</p>
                     </div>
+                    <!--<div>-->
+                        <!--<el-select v-model="form.user_groups" placeholder="请选择分组" class="base-input">-->
+                            <!--<el-option-->
+                                <!--v-for="item in options"-->
+                                <!--:key="item"-->
+                                <!--:value="item">-->
+                            <!--</el-option>-->
+                        <!--</el-select>-->
+                    <!--</div>-->
                     <a @click="register" href="javascript:;" class="btn signup-btn btn-yellow">确认注册</a>
                     <a @click="login" href="javascript:;" class="btn signup-btn btn-blue">直接登录</a>
                 </div>
@@ -28,7 +37,7 @@
     </div>
 </template>
 
-<script lang="babel">
+<script>
 import api from '~api'
 import { strlen } from '~utils'
 
@@ -36,9 +45,11 @@ export default {
     props: ['show'],
     data() {
         return {
+            options:['家里','组里'],
             form: {
                 username: '',
                 email: '',
+                user_groups:'组里',
                 password: '',
                 re_password: ''
             }
@@ -59,13 +70,17 @@ export default {
             } else if (strlen(this.form.username) < 4) {
                 this.$store.dispatch('global/showMsg', '用户长度至少 2 个中文或 4 个英文!')
                 return
-            } else if (strlen(this.form.password) < 8) {
-                this.$store.dispatch('global/showMsg', '密码长度至少 8 位!')
+            } else if (strlen(this.form.password) < 6) {
+                this.$store.dispatch('global/showMsg', '密码长度至少 6 位!')
                 return
             } else if (this.form.password !== this.form.re_password) {
                 this.$store.dispatch('global/showMsg', '两次输入的密码不一致!')
                 return
             }
+            // else if (!this.form.user_groups){
+            //     this.$store.dispatch('global/showMsg', '请选择分组')
+            //     return
+            // }
             const { data: { message, code} } = await api.post('frontend/user/insert', this.form)
             if (code === 200) {
                 this.$store.dispatch('global/showMsg', {

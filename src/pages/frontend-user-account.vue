@@ -5,7 +5,7 @@
                     <div class="article-content">
                         <h3 class="about-title" v-if="isSelf">您好，{{form.username}}
                             <div style="float: right">
-                                <el-button @click="changePassword"><i class="el-icon-edit-outline"></i> 密码</el-button>
+                                <el-button @click="changePassword"><i class="el-icon-edit-outline"></i> 管理</el-button>
                                 <el-button @click="handleLogout"><i class="el-icon-upload2"></i> 登出</el-button>
                             </div>
                         </h3>

@@ -9,15 +9,24 @@
                 <input type="password" v-model="form.password" placeholder="密码" class="base-input" name="password">
                 <span class="input-info error">请输入密码</span>
             </a-input>
+            <a-input title="分组">
+                <el-select v-model="form.user_groups" multiple placeholder="请选择分组">
+                    <el-option
+                        v-for="item in options"
+                        :key="item"
+                        :value="item">
+                    </el-option>
+                </el-select>
+            </a-input>
         </div>
         <div class="settings-footer clearfix">
             <router-link to="/backend/user/list" class="btn btn-blue">返回</router-link>
-            <a @click="modify" href="javascript:;" class="btn btn-yellow">编辑管理员</a>
+            <a @click="modify" href="javascript:;" class="btn btn-yellow">保存</a>
         </div>
     </div>
 </template>
 
-<script lang="babel">
+<script>
 import { mapGetters } from 'vuex'
 import api from '~api'
 import aInput from '~components/_input.vue'
@@ -27,11 +36,13 @@ const fetchInitialData = async store => {
 export default {
     data() {
         return {
+            options:['家里','组里'],
             form: {
                 id: this.$route.params.id,
                 username: '',
                 email: '',
-                password: ''
+                password: '',
+                user_groups:[]
             }
         }
     },
@@ -49,6 +60,7 @@ export default {
                 this.$store.dispatch('global/showMsg', '请将表单填写完整!')
                 return
             }
+            this.form.user_groups = this.form.user_groups.join(';')
             const { data: { message, code, data} } = await api.post('backend/user/modify', this.form)
             if (code === 200) {
                 this.$store.dispatch('global/showMsg', {
@@ -72,6 +84,7 @@ export default {
         item(val) {
             this.form.username = val.data.username
             this.form.email = val.data.email
+            this.form.user_groups = val.data.user_groups.split(';')
         }
     }
 }
