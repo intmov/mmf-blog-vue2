@@ -119,6 +119,7 @@ export default {
             // needSign:  return true,
             user: '',
             userData: {},
+            usersInGroup: [],
             group:{
                 userGroups:[],
                 currentUserGroup:'',
@@ -159,8 +160,15 @@ export default {
             }
             fetchInitialData(this.$store,{page:1,user_groups:this.group.currentUserGroup})
         },
+        async getUserInGroup(){
+            const ret = await api.get('frontend/user/group', { user_groups: this.group.currentUserGroup})
+            console.log(ret)
+            if(ret && ret.data && ret.data.code === 200){
+                this.usersInGroup = ret.data.data
+            }
+        },
         clickExport(){
-            let message = ''
+            let message = `${now}读经情况：\n`
             // console.log(this.topics)
             this.topics.data.map (row => {
                 message += `${row.username}[${row.update_date.substr(11,5)}]：`
@@ -177,14 +185,29 @@ export default {
                 message += "，共"+row.chapters+"章\n"
             })
 
+            if (this.usersInGroup && this.usersInGroup.length > 0) {
+                let hasNone = false
+                this.usersInGroup.map(u => {
+                    if (this.topics.data.findIndex(row => row.username === u.username) === -1) {
+                        message += `\n@${u.username} `
+                        hasNone = true
+                    }
+                })
+                if (hasNone) {
+                    message += "今日未打卡！请尽快读经！"
+                }
+            }
+
             this.$copyText(message).then(e => {
                 this.$store.dispatch('global/showMsg',{
                     content: '复制成功',
                     type: 'success'
                 })
             }, e => {
+                console.error(e)
                 this.$store.dispatch('global/showMsg','复制失败')
             })
+
         },
         getVerse(verse){
             if(verse && verse.length > 0){
@@ -214,6 +237,7 @@ export default {
                 }
                 fetchInitialData(this.$store, {page: 1,user_groups:this.group.currentUserGroup})
                 this.changeMonth(now)
+                this.getUserInGroup()
             }
         },
 
