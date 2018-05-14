@@ -36,15 +36,15 @@
         <div>
             <div class="home-feeds cards-wrap">
                 <el-row style="margin-bottom: 5px;" type="flex" justify="center">
-                    <div class="sepline">
-                        <span> = = <el-select   v-if="group.userGroups && group.userGroups.length > 1"  size="mini" style="width: 80px;" v-model="group.currentUserGroup" placeholder="请选择分组">
-                    <el-option
-                        v-for="item in group.userGroups"
-                        :key="item"
-                        :value="item">
-                    </el-option>
-                </el-select> 打卡详情 (<span style="color:purple;">{{topics.data.length}}</span>) = =</span>
-                    </div>
+                    <el-col :span="20">
+                        <el-select   v-if="group.userGroups && group.userGroups.length > 1"  size="mini" style="width: 80px;" v-model="group.currentUserGroup" placeholder="请选择分组">
+                            <el-option v-for="item in group.userGroups" :key="item" :value="item" />
+                        </el-select>
+                        <span style="margin-left: 5px;">打卡详情 (<span style="color:purple;">{{topics.data.length}}</span>) </span>
+                    </el-col>
+                    <el-col :span="4" style="text-align: right;">
+                        <el-button @click="clickExport" size="mini" >复制</el-button>
+                    </el-col>
                 </el-row>
                 <topics-item-none v-if="!topics.path">加载中, 请稍等...</topics-item-none>
                 <template v-else-if="topics.data.length > 0">
@@ -103,7 +103,7 @@ export default {
         }),
         needSign () {
             let ret = this.monthList.length <=0
-            console.log(this.monthList)
+            // console.log(this.monthList)
             // console.log(this.monthList.indexOf(parseInt(now.slice(8,10),10)))
             ret = ret || this.monthList.indexOf(parseInt(now.slice(8,10),10))===-1
             ret = ret && now <= moment().format(dateformat)
@@ -143,7 +143,7 @@ export default {
             this.changeMonth(now)
         },
         changeMonth(data){
-            console.log('change month!'+data)
+            // console.log('change month!'+data)
             const base = {limit: 1000, date: moment(data,dateformat).format("YYYY-MM"), user:this.user}
             this.$store.dispatch('frontend/article/getMonthList', base)
 
@@ -158,6 +158,39 @@ export default {
                 })
             }
             fetchInitialData(this.$store,{page:1,user_groups:this.group.currentUserGroup})
+        },
+        clickExport(){
+            let message = ''
+            // console.log(this.topics)
+            this.topics.data.map (row => {
+                message += `${row.username}[${row.update_date.substr(11,5)}]：`
+                for(const item of JSON.parse(row.items)){
+                    let catalog = ''
+                    if(item.catalog !=='通读') catalog = item.catalog
+                    if(item.bookStart === item.bookEnd){
+                        message += `${catalog}${item.bookStart}${this.getVerse(item.verseStart)}-${this.getVerse(item.verseEnd)}、`
+                    }else{
+                        message += `${catalog}${item.bookStart}${this.getVerse(item.verseStart)}-${item.bookEnd}${this.getVerse(item.verseEnd)}、`
+                    }
+                }
+                if(message.endsWith("、")) message = message.substr(0,message.length-1)
+                message += "，共"+row.chapters+"章\n"
+            })
+
+            this.$copyText(message).then(e => {
+                this.$store.dispatch('global/showMsg',{
+                    content: '复制成功',
+                    type: 'success'
+                })
+            }, e => {
+                this.$store.dispatch('global/showMsg','复制失败')
+            })
+        },
+        getVerse(verse){
+            if(verse && verse.length > 0){
+                return verse[0]+''+(verse[1]?":"+verse[1]:'')
+            }
+            return ''
         },
         async getData() {
             const username = cookies.get('username')
@@ -183,6 +216,7 @@ export default {
                 this.changeMonth(now)
             }
         },
+
     },
     mounted() {
         this.getData()

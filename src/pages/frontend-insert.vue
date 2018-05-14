@@ -2,14 +2,22 @@
 
     <div class="settings-main card">
         <!--<book-selector :visible="selectDialogVisible"></book-selector>-->
-        <el-form ref="form" :model="form"  @submit.prevent="onSubmit" >
+        <el-form ref="form" :model="form"  @submit.prevent="onSubmit" :rules="formRules">
             <div class='article-title'>为<span style="color: purple;"> {{form.date}} </span>打卡：</div>
-            <el-form-item label="投入时间" label-width="80px" class="setSign">
+            <el-form-item label="投入时间" label-width="80px" class="setSign" prop="readtime">
                 <el-col :span="18">
-                    <el-time-picker type="fixed-time"  value-format="HH:mm"  format="HH小时-mm分钟"  placeholder="选择时间" v-model="form.readtime" style="width: 100%;"></el-time-picker>
+                    <el-time-select  value-format="HH:mm"  format="HH小时-mm分钟"
+                        placeholder="小时:分钟" v-model="form.readtime"
+                        :picker-options="{
+                          start: '00:00',
+                          step: '00:10',
+                          end: '06:00'
+                        }">
+                    </el-time-select>
+                    <!--<el-time-picker type="fixed-time"  value-format="HH:mm"  format="HH小时-mm分钟"  placeholder="选择时间" v-model="form.readtime" style="width: 100%;"></el-time-picker>-->
                 </el-col>
             </el-form-item>
-            <el-form-item label="读经质量" label-width="80px">
+            <el-form-item label="读经质量" label-width="80px"  prop="quality">
                 <el-col :span="18">
                     <el-rate style="margin-top: 10px;"
                              v-model="form.quality" show-text :texts="quality_text"
@@ -128,10 +136,10 @@
                 }],
                 form: {
                     title: '',
-                    quality: null,
+                    quality: '',
                     category: '',
                     content: '',
-                    readtime: '00:30',
+                    readtime: '',
                     items: [{
                         catalog: '通读',
                         bookStart: [],
@@ -147,6 +155,15 @@
                     date: localStorage.selectDate,
                     chapters: 0,
                     meditation: 0
+                },
+                formRules:{
+                    readtime: [
+                        { required: true, message: '请输入投入时间', trigger: 'blur' },
+                        { min: 1, max: 32, message: '长度在 1 到 32 个字符', trigger: 'blur' }
+                    ],
+                    quality: [
+                        { required: true, message: '请输入读经质量', trigger: 'blur' },
+                    ],
                 }
             }
         },
@@ -183,10 +200,12 @@
                 return total
             },
             insertPreview(){
-                if (!this.form.readtime || !this.form.quality || !this.form.items || !this.form.items[0].verseStart || !this.form.items[0].verseEnd) {
-                    this.$store.dispatch('global/showMsg', '必须填写投入时间+读经质量+读经内容')
+                if (!this.form.quality || !this.form.items || !this.form.items[0].verseStart || !this.form.items[0].verseEnd) {
+                    this.$store.dispatch('global/showMsg', '必须填写读经质量+读经内容')
                     return false
                 }
+
+
                 this.form.items2 = []
                 var ret = true
                 let meditation = 0
@@ -222,23 +241,28 @@
                 this.form.readtime2 = parseInt(this.form.readtime.substr(0,2),10)*60+parseInt(this.form.readtime.substr(3,2),10)
                 this.dialogPreviewVisible = true
                 return true
-            },
-            async insert() {
-                if(!this.insertPreview()) return
-                localStorage.lastActivity = JSON.stringify(this.form.items)
-                this.form.items=[]
 
-                this.dialogPreviewVisible = false
-                const { data: { message, code, data} } = await api.post('backend/article/insert', this.form)
-                if (code === 200) {
-                    this.$store.dispatch('global/showMsg', {
-                        type: 'success',
-                        content: message
-                    })
-                    this.$store.commit('backend/article/insertArticleItem', data)
-                    await this.$store.dispatch('frontend/article/getArticleList')
-                    this.$router.push('/')
-                }
+            },
+            insert() {
+                this.$refs['form'].validate( async valid => {
+                    if (!valid) return
+                    if(!this.insertPreview()) return
+                    localStorage.lastActivity = JSON.stringify(this.form.items)
+                    this.form.items=[]
+
+                    this.dialogPreviewVisible = false
+                    const { data: { message, code, data} } = await api.post('backend/article/insert', this.form)
+                    if (code === 200) {
+                        this.$store.dispatch('global/showMsg', {
+                            type: 'success',
+                            content: message
+                        })
+                        this.$store.commit('backend/article/insertArticleItem', data)
+                        await this.$store.dispatch('frontend/article/getArticleList')
+                        this.$router.push('/')
+                    }
+                })
+
             },
             cancel(){
                 this.$router.go(-1)

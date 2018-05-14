@@ -142,7 +142,7 @@
             },
             clickSearch(){
                 this.getSummaryData({type:this.rangeOption, startDate: this.startDate, endDate: this.endDate})
-            }
+            },
 
         },
         mounted() {
