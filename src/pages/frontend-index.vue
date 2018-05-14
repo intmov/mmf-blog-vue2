@@ -189,7 +189,8 @@ export default {
                 let hasNone = false
                 this.usersInGroup.map(u => {
                     if (this.topics.data.findIndex(row => row.username === u.username) === -1) {
-                        message += `\n@${u.username} `
+                        if(!hasNone) message +="\n"
+                        message += `@${u.username} `
                         hasNone = true
                     }
                 })
