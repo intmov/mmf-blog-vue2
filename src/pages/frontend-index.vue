@@ -171,7 +171,7 @@ export default {
             let message = `${now}读经情况：\n`
             // console.log(this.topics)
             this.topics.data.map (row => {
-                message += `${row.username}[${row.update_date.substr(11,5)}]：`
+                message += `${row.username}：`
                 for(const item of JSON.parse(row.items)){
                     let catalog = ''
                     if(item.catalog !=='通读') catalog = item.catalog
