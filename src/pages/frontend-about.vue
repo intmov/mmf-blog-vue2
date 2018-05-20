@@ -3,8 +3,8 @@
         <section class="wh_container">
             <div class="wh_content_all">
                 <!-- -->
-                <plan-viewer :title="nt_title" :plan="nt_items"></plan-viewer>
                 <plan-viewer :title="ot_title" :plan="ot_items"></plan-viewer>
+                <plan-viewer :title="nt_title" :plan="nt_items"></plan-viewer>
             </div>
         </section>
     </div>
