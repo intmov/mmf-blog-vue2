@@ -16,7 +16,7 @@ const state = {
 
 const actions = {
     async ['getUserList'] ({commit, rootState: {route: { path }}}, config) {
-        const { data: { data, code} } = await api.get('backend/user/list', {...config, limit:30， cache: true})
+        const { data: { data, code} } = await api.get('backend/user/list', {...config, limit:30, cache: true})
         if (data && code === 200) {
             commit('receiveUserList', {
                 ...data,
