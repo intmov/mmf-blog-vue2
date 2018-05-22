@@ -160,7 +160,7 @@ export default {
             }
             fetchInitialData(this.$store,{page:1,user_groups:this.group.currentUserGroup})
         },
-        changeGroup(){
+        async changeGroup(){
             const ret = await api.get('frontend/user/group', { user_groups: this.group.currentUserGroup})
             if(ret && ret.data && ret.data.code === 200){
                 this.usersInGroup = ret.data.data
