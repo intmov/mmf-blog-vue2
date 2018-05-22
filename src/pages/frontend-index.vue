@@ -37,7 +37,7 @@
             <div class="home-feeds cards-wrap">
                 <el-row style="margin-bottom: 5px;" type="flex" justify="center">
                     <el-col :span="20">
-                        <el-select   v-if="group.userGroups && group.userGroups.length > 1"  size="mini" style="width: 80px;" v-model="group.currentUserGroup" placeholder="请选择分组">
+                        <el-select @change="changeGroup"  v-if="group.userGroups && group.userGroups.length > 1"  size="mini" style="width: 80px;" v-model="group.currentUserGroup" placeholder="请选择分组">
                             <el-option v-for="item in group.userGroups" :key="item" :value="item" />
                         </el-select>
                         <span style="margin-left: 5px;">打卡详情 (<span style="color:purple;">{{topics.data.length}}</span>) </span>
@@ -159,6 +159,13 @@ export default {
                 })
             }
             fetchInitialData(this.$store,{page:1,user_groups:this.group.currentUserGroup})
+        },
+        changeGroup(){
+          const ret = await api.get('frontend/user/group', { user_groups: this.group.currentUserGroup})
+          if(ret && ret.data && ret.data.code === 200){
+              this.usersInGroup = ret.data.data
+              fetchInitialData(this.$store,{page:1,user_groups:this.group.currentUserGroup})
+          }
         },
         async getUserInGroup(){
             const ret = await api.get('frontend/user/group', { user_groups: this.group.currentUserGroup})
