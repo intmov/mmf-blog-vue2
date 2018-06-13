@@ -136,10 +136,10 @@
                 }],
                 form: {
                     title: '',
-                    quality: '',
+                    quality: 3.0,
                     category: '',
                     content: '',
-                    readtime: '',
+                    readtime: '00:30',
                     items: [{
                         catalog: '通读',
                         bookStart: [],
