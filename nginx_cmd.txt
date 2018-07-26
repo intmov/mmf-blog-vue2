@@ -1,0 +1,42 @@
+  530  sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+  531  yum install -y nginx
+  532  systemctl start nginx.service
+  533  systemctl enable nginx.service
+  534  vim /etc/nginx/
+  535  cd /etc/nginx/
+  540  nginx -g
+  541  nginx -t
+  545  nginx -s reload
+  546  nginx 
+  547  nginx -s reload
+  549  nginx -t
+  550  nginx -s reload
+  554  nginx -s reload
+  568  nginx -s reload
+  573  nginx -s reload
+  634  cd /var/log/nginx/
+  640  vim /etc/nginx/conf.d/default.conf 
+  641  nginx -s reload
+  820  nginx -s reload
+  829  vim /etc/nginx/conf.d/default.conf 
+  830  nginx -s reload
+  834  vim /etc/nginx/nginx.conf 
+  835  vim /etc/nginx/conf.d/default.conf 
+  836  vim /etc/nginx/nginx.conf 
+  837  nginx -s realod
+  838  nginx -s reload
+  839  vim /etc/nginx/nginx.conf 
+  840  nginx -s reload
+  841  vim /etc/nginx/nginx.conf 
+  842  nginx -s reload
+  843  vim /etc/nginx/nginx.conf 
+  844  nginx -s reload
+  845  vim /etc/nginx/nginx.conf 
+  846  nginx -s reload
+  855  vim /etc/nginx/nginx.conf 
+  857  nginx -s reload
+  858  vim /etc/nginx/nginx.conf 
+  859  nginx -s reload
+  889  cp /etc/nginx/nginx.conf mmf-blog-vue2/
+  954  history | grep nginx
+  955  history | grep nginx > nginx_cmd.txt
