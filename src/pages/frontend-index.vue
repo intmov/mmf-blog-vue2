@@ -202,7 +202,7 @@ export default {
                     }
                 })
                 if (hasNone) {
-                    message += "今日未打卡！请尽快读经！"
+                    message += "尽快读经吧/微笑 /拳头"
                 }
             }
 
