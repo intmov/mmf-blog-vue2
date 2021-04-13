@@ -326,7 +326,7 @@ export const testments2   = [
     },
     {
         index: 11,
-        name: '列王记上',
+        name: '列王纪上',
         simpleName: '王上',
         enName: 'I Kings',
         enSimpleName: '1Kgs',
@@ -337,7 +337,7 @@ export const testments2   = [
     },
     {
         index: 12,
-        name: '列王记下',
+        name: '列王纪下',
         simpleName: '王下',
         enName: 'II Kings',
         enSimpleName: '2Kgs',
@@ -348,7 +348,7 @@ export const testments2   = [
     },
     {
         index: 13,
-        name: '历代记上',
+        name: '历代志上',
         simpleName: '代上',
         enName: 'I Chronicles',
         enSimpleName: '1Chr',
@@ -359,7 +359,7 @@ export const testments2   = [
     },
     {
         index: 14,
-        name: '历代记下',
+        name: '历代志下',
         simpleName: '代下',
         enName: 'II Chronicles',
         enSimpleName: '2Chr',
